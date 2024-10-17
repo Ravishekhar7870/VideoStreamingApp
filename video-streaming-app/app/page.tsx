@@ -1,7 +1,16 @@
-import Image from "next/image";
-import { Button } from "@/components/ui/button";
-export default function Home() {
+// pages/index.tsx
+import { RedirectToSignIn, SignedIn, SignedOut } from '@clerk/nextjs';
+import { UserButton } from '@clerk/nextjs';
+export default function HomePage() {
   return (
-   <Button size='lg' variant='destructive'>Sign In</Button>
+    <>
+      <SignedIn>
+        <div>Welcome to your app!</div>
+        <UserButton afterSignOutUrl='/'/>
+      </SignedIn>
+      <SignedOut>
+        <RedirectToSignIn />
+      </SignedOut>
+    </>
   );
 }
