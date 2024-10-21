@@ -9,7 +9,7 @@ async function DbConect():Promise<void>{
       return;
    }
    try {
-    const dbconnection= await mongoose.connect("mongodb+srv://yadavravishekhar01:Rr7388073@cluster0.pruwn.mongodb.net/VideoStreamingApp?retryWrites=true&w=majority&appName=Cluster0" ,{})
+    const dbconnection= await mongoose.connect(process.env.MONGO_DB_URI || "" ,{})
     console.log("databse connected")
     connection.isConnected=dbconnection.connections[0].readyState
    } catch (error) {
