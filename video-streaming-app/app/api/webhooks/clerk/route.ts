@@ -45,13 +45,58 @@ export async function POST(req: Request) {
   const eventType = evt.type
   await DbConect();
   if(eventType==='user.created'){
-      const createUser=await UserModel.create({
-        clerkId:payload.data.id,
-        username:payload.data.username,
-        ProfilePic:payload.data.image_url
-      })
-      console.log(createUser);
+     try {
+       const createUser=await UserModel.create({
+         clerkId:payload.data.id,
+         username:payload.data.username,
+         ProfilePic:payload.data.image_url
+       })
+     } catch (error:any) {
+      return new Response(error?.message,{status:500})
+     }
+     
   }
+  if(eventType==='user.updated'){
+     const clerkId=payload.data.id;
+     const currUser=await UserModel.findOne({
+       clerkId:clerkId
+     })
+     if(!currUser){
+     
+        return new Response("couldn't find  the user",{status:400})
+     }
+     if(currUser){
+      try {
+        currUser.username=payload?.data?.username ;
+        currUser.ProfilePic=payload?.data?.image_url;
+        await currUser.save({validateBeforeSave:false})
+        const updatedUser=await UserModel.findById(currUser._id);
+      
+      } catch (error) {
+        return new Response("something went wrong",{status:500})
+      }
+     }
+     
+
+  }
+  if(eventType==='user.deleted'){
+    const clerkId=payload.data.id;
+    const user=await UserModel.findOne({
+       clerkId:clerkId
+    })
+    if(!user){
+        return new Response("couldn't find the user",{status:400})
+    }
+    else{
+       try {
+      await   UserModel.findByIdAndDelete(user._id)
+       
+       } catch (error) {
+          return new Response("something went wrong",{status:500})
+       }
+    }
+  }
+
   
 
   return new Response('', { status: 200 })
