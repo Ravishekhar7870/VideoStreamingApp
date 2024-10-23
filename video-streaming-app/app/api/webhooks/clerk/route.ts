@@ -51,6 +51,7 @@ export async function POST(req: Request) {
          username:payload.data.username,
          ProfilePic:payload.data.image_url
        })
+       
      } catch (error:any) {
       return new Response(error?.message,{status:500})
      }
@@ -89,7 +90,9 @@ export async function POST(req: Request) {
     }
     else{
        try {
-      await   UserModel.findByIdAndDelete(user._id)
+        console.log(user)
+         await  UserModel.findByIdAndDelete(user._id)
+        
        
        } catch (error) {
           return new Response("something went wrong",{status:500})

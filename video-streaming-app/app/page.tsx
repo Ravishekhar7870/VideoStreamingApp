@@ -1,12 +1,18 @@
 // pages/index.tsx
 import { RedirectToSignIn, SignedIn, SignedOut } from '@clerk/nextjs';
 import { UserButton } from '@clerk/nextjs';
+
 export default function HomePage() {
+    
+       
+ 
+
   return (
     <>
-      <SignedIn>
+      <SignedIn >
+    
         <div>Welcome to your app!</div>
-        <UserButton afterSignOutUrl='/'/>
+        <UserButton />
       </SignedIn>
       <SignedOut>
         <RedirectToSignIn />

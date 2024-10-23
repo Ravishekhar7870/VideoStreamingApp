@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { shadesOfPurple } from "@clerk/themes";
 import { ThemeProvider } from "@/components/theme-provider";
+
 import "./globals.css";
 
 const geistSans = localFont({
@@ -25,9 +26,13 @@ export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
-}>) {
+}>)
+   
+ {
   return (
-    <ClerkProvider appearance={{baseTheme:shadesOfPurple}}>
+    <ClerkProvider appearance={{baseTheme:shadesOfPurple}}
+    
+    >
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
