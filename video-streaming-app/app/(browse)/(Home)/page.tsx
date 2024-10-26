@@ -10,12 +10,9 @@ export default function HomePage() {
   return (
     <>
       <SignedIn >
-    
-        <div>Welcome to your app!</div>
-        <UserButton />
       </SignedIn>
       <SignedOut>
-        <RedirectToSignIn />
+       
       </SignedOut>
     </>
   );
