@@ -16,7 +16,7 @@ async function Action() {
         </SignInButton>)}
      {
         !!user && (
-            <div>
+            <div className='flex items-center gap-x-3'>
                 <Button
                 size='sm'
                 variant='ghost'
