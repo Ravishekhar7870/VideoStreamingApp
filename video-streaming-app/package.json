@@ -12,6 +12,7 @@
     "@clerk/nextjs": "^5.7.5",
     "@clerk/themes": "^2.1.37",
     "@radix-ui/react-slot": "^1.1.0",
+    "@reduxjs/toolkit": "^2.3.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "lucide-react": "^0.453.0",
@@ -21,6 +22,7 @@
     "query-string": "^9.1.1",
     "react": "^18",
     "react-dom": "^18",
+    "react-redux": "^9.1.2",
     "svix": "^1.37.0",
     "tailwind-merge": "^2.5.4",
     "tailwindcss-animate": "^1.0.7"
