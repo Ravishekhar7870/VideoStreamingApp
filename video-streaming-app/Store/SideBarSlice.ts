@@ -8,6 +8,9 @@ const SideBarSlice=createSlice({
     reducers:{
         ChangeState:(state)=>{
           state.isCollapsed=!state.isCollapsed
+        },
+        setCollapseAsTrue:(state)=>{
+            state.isCollapsed=true;
         }
     }
 })

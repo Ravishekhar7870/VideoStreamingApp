@@ -5,7 +5,9 @@ import Toggle from './Toggle'
 function Sidebar() {
   return (
    <Wrapper>
-      <Toggle/>
+     {/* <div className="hidden sm:block"> Hide Toggle on small screens */}
+        <Toggle />
+    
    </Wrapper>
   )
 }
