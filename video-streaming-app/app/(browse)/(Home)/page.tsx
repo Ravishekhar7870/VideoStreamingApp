@@ -10,6 +10,7 @@ export default function HomePage() {
   return (
     <>
       <SignedIn >
+        Home page
       </SignedIn>
       <SignedOut>
        

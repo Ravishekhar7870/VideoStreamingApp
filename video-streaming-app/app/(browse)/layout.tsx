@@ -3,6 +3,7 @@ import React from 'react'
 import Navbar from './_component/Navbar/Navbar'
 import Sidebar from './_component/Sidebar'
 import ReduxLayout from './ReduxLayout'
+import Container from './Container'
 function Browselayout({children}:{children:React.ReactNode}) {
   return (
     < >
@@ -10,7 +11,9 @@ function Browselayout({children}:{children:React.ReactNode}) {
     <Navbar/>
        <div className='h-full pt-20'>
         <Sidebar/>
+        <Container>
        {children}
+       </Container>
         </div>
         </ReduxLayout>
     </>
