@@ -2,6 +2,7 @@
 import { User } from '@/Model/User.mode';
 import React from 'react'
 import { useSelector } from 'react-redux';
+import UserItem from './UserItem';
 interface RecommendedProps{
     data:User[]
 }
@@ -19,6 +20,14 @@ function Recommended({data}:RecommendedProps) {
                 </div>
              )
            }
+           <ul className='space-y-2 px-2'>
+             {
+                data.map((user)=>(
+                    <UserItem key={user.clerkId} username={user.username} isLive={true} imageUrl={user.ProfilePic}
+                    />
+                ))
+             }
+           </ul>
         </div>
     );
 }
