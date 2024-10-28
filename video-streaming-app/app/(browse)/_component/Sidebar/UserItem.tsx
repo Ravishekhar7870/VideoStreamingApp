@@ -28,6 +28,11 @@ function UserItem({username,isLive,imageUrl}:UserItemProps) {
       imageUrl={imageUrl}
       islive={isLive}
       />
+      {!isCollapsed && (
+        <p className='truncate'>
+            {username}
+        </p>
+      )}
      </div>
      </Link>
     </Button>

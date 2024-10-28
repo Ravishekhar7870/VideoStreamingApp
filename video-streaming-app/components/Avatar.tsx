@@ -1,5 +1,6 @@
 import React from 'react'
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Skeleton } from '@/components/ui/skeleton'
 interface AvatarProps{
     username:string
     islive?:boolean,
@@ -17,6 +18,13 @@ function ChannelAvatar({username,islive,imageUrl}:AvatarProps) {
      </Avatar>
     </div>
   )
+}
+export const AvatarSkelton=()=>{
+   return (
+    <div>
+        <Skeleton className='rounded-full'></Skeleton>
+    </div>
+   )
 }
 
 export default ChannelAvatar
