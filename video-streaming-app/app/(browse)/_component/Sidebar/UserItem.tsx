@@ -38,5 +38,11 @@ function UserItem({username,isLive,imageUrl}:UserItemProps) {
     </Button>
   )
 }
-
+export const UserItemSkelton=()=>{
+    return (
+        <li className='flex items-center gap-x-4 px-3 py-2'>
+            <Skeleton className='min-h-[32px] min-w-[32px] rounded-full'/>
+        </li>
+    )
+}
 export default UserItem
