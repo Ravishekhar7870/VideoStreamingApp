@@ -1,9 +1,10 @@
 
 import React, { Suspense } from 'react'
 import Navbar from './_component/Navbar/Navbar'
-import Sidebar, { SidebarSkelton } from './_component/Sidebar'
+import Sidebar  from './_component/Sidebar'
 import ReduxLayout from './ReduxLayout'
 import Container from './Container'
+import { SidebarSkelton } from './_component/Sidebar/Wrapper'
 function Browselayout({children}:{children:React.ReactNode}) {
   return (
     < >
