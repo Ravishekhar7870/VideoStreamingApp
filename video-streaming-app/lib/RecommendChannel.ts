@@ -3,7 +3,7 @@ import getUser from "./GetUser";
 import UserModel from "@/Model/User.mode";
 const RecommendChannel=async()=>{
    try {
-    DbConect();
+    await  DbConect();
      const Users=await UserModel.aggregate(
          [
              {
