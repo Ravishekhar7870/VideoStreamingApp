@@ -2,7 +2,7 @@
 import { User } from '@/Model/User.mode';
 import React from 'react'
 import { useSelector } from 'react-redux';
-import UserItem from './UserItem';
+import UserItem, { UserItemSkelton } from './UserItem';
 interface RecommendedProps{
     data:User[]
 }
@@ -30,5 +30,16 @@ function Recommended({data}:RecommendedProps) {
            </ul>
         </div>
     );
+}
+export const RecommendedSkelton=()=>{
+    return (
+        <ul className='px-2'>
+          {
+            [...Array(4)].map((_,i)=>(
+                <UserItemSkelton key={i}/>
+            ))
+          }
+        </ul>
+    )
 }
 export default Recommended
