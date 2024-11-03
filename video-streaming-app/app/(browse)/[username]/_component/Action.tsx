@@ -1,5 +1,5 @@
 'use client'
-import { followUser } from '@/Actions/follow.actions'
+import { followUser, Unfollow } from '@/Actions/follow.actions'
 import { Button } from '@/components/ui/button'
 import React, { useTransition } from 'react'
 import { toast } from 'sonner'
@@ -9,7 +9,7 @@ interface ActionProps{
 }
 function Action({isfollow,id}:ActionProps) {
     const [isPending,startTransition]=useTransition()
-    const Onclick=async()=>{
+    const OnFollow=async()=>{
         startTransition(()=>{
             followUser(id)
             .then((data)=>{
@@ -21,9 +21,28 @@ function Action({isfollow,id}:ActionProps) {
         })
       
     }
+    const onUnfollow=async()=>{
+        startTransition(()=>{
+            Unfollow(id)
+            .then((data)=>{
+                toast.success(`You have Unfollowed ${data}`)
+            })
+            .catch(()=>{
+                toast.error("Couldn't Unfollow the User")
+            })
+        })
+    }
+    const Onclick=()=>{
+        if(isfollow){
+            onUnfollow()
+        }
+        else{
+            OnFollow();
+        }
+    }
   return (
-    <Button disabled={isPending || isfollow}  variant='primary' onClick={Onclick}>
-        Action
+    <Button disabled={isPending }  variant='primary' onClick={Onclick}>
+        {isfollow? "Unfollow":"Follow"}
     </Button>
   )
 }

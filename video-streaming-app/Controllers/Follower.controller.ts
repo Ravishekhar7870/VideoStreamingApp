@@ -62,3 +62,23 @@ export const follow=async(id:string)=>{
         throw new Error(error.message)
     }
 }
+export const unfollowUser=async(id:string)=>{
+   await DbConect();
+   const currUser=await getUser();
+   if (id.toString() === currUser._id.toString()) {
+     throw new Error("cannot unfollow yourself")
+}
+   try {
+     const otherUser=await UserModel.findById(id);
+     if(!otherUser){
+        throw new Error("Couldn't find User")
+     }
+     const deletedFollow=await FollowerModel.findOneAndDelete({
+        followerId:currUser?._id,
+        ChannelId:otherUser?._id
+     })
+    return deletedFollow
+   } catch (error:any) {
+    throw new Error(error.message)
+   }
+}

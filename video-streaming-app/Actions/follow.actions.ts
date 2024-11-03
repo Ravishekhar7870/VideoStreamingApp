@@ -1,6 +1,6 @@
 'use server'
 
-import { follow } from "@/Controllers/Follower.controller"
+import { follow, unfollowUser } from "@/Controllers/Follower.controller"
 import { revalidatePath } from "next/cache"
 import UserModel from "@/Model/User.mode"
 export const followUser=async(id:string)=>{
@@ -18,4 +18,13 @@ export const followUser=async(id:string)=>{
    } catch (error:any) {
     throw new Error(error.message)
    }
+}
+export const Unfollow=async(id:string)=>{
+    const deletedFollow=await unfollowUser(id)
+    revalidatePath('/')
+    if(deletedFollow){
+        const deletedUser=await UserModel.findById(deletedFollow?.ChannelId)
+        revalidatePath(`/${deletedUser?.username}`)
+        return deletedUser?.username;
+    }
 }
