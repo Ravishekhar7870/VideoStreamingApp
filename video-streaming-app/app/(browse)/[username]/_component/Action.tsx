@@ -12,8 +12,8 @@ function Action({isfollow,id}:ActionProps) {
     const Onclick=async()=>{
         startTransition(()=>{
             followUser(id)
-            .then(()=>{
-                toast.success("Followed the User")
+            .then((data)=>{
+                toast.success(`You are now following ${data}`)
             })
             .catch(()=>{
                 toast.error("Couldn't follow the User")
