@@ -9,17 +9,18 @@ export const isfollowing=async(id:string)=>{
     }
    await DbConect();
    const currUser=await getUser();
-   if(id===currUser._id){
+   
+   if (id.toString() === currUser._id.toString()) {
     return true;
-   }
+}
    try {
       const otherUser=await UserModel.findById(id);
       if(!otherUser){
         throw new Error("user doesn't exist")
       }
       const following=await FollowerModel.findOne({
-        follower:currUser._id,
-        Channel:otherUser?._id,
+        followerId:currUser._id,
+        ChannelId:otherUser?._id,
       });
       if(following){
         return true;
@@ -31,4 +32,33 @@ export const isfollowing=async(id:string)=>{
     
     throw new Error(error.message)
    }
+}
+export const follow=async(id:string)=>{
+    await DbConect();
+    const currUser=await getUser();
+    if(!currUser){
+        return;
+    }
+    try {
+        const OtherUser=await UserModel.findById(id);
+        if(!OtherUser){
+            throw new Error("couldn't find the user")
+        }
+        const isfollower=await FollowerModel.findOne({
+             followerId:currUser._id,
+             ChannelId:OtherUser._id
+        });
+        if(isfollower){
+            throw new Error("already following")
+        }
+        const newFollowing=await FollowerModel.create({
+            followerId:currUser._id,
+            ChannelId:OtherUser._id,
+        })
+        if(newFollowing){
+            return newFollowing
+        }
+    } catch (error:any) {
+        throw new Error(error.message)
+    }
 }

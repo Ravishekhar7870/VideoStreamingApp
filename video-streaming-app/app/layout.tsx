@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { shadesOfPurple } from "@clerk/themes";
 import { ThemeProvider } from "@/components/theme-provider";
-
+import { Toaster } from "sonner";
 import "./globals.css";
 
 const geistSans = localFont({
@@ -45,7 +45,7 @@ export default function RootLayout({
         forcedTheme="dark"
         storageKey="GoLive"
         >
-        
+        <Toaster theme='light' position='bottom-center'/>
         {children}
         </ThemeProvider>
       </body>

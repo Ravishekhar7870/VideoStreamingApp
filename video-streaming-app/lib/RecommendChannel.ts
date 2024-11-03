@@ -9,11 +9,11 @@ const RecommendChannel=async()=>{
   }
   let currUser;
    try {
-    currUser=await getUser()
+    currUser=await getUser();
    } catch (error) {
     currUser=null
    }
-   console.log("currentUser is",currUser)
+   
   if(currUser){
     try {
     

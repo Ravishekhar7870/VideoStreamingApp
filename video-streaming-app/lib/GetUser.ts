@@ -5,7 +5,7 @@ const getUser=async()=>{
     try {
         await DbConect()
        const currUser=await currentUser();
-       console.log("clerkUser",currUser);
+       
        if(!currUser){
         throw new Error("No user is currently logged in")
        }
