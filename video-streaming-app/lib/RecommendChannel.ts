@@ -7,12 +7,13 @@ const RecommendChannel=async()=>{
   } catch (error:any) {
     throw new Error(error.message)
   }
-  let currUser=null;
+  let currUser;
    try {
     currUser=await getUser()
    } catch (error) {
     currUser=null
    }
+   console.log("currentUser is",currUser)
   if(currUser){
     try {
     

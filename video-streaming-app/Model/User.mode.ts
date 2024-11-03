@@ -1,5 +1,6 @@
-import mongoose,{Schema,Document} from "mongoose";
+import mongoose,{Schema,Document,Types} from "mongoose";
 export interface User extends Document{
+    _id: string,
     username:string,
     clerkId:string,
     bio?:string,
