@@ -7,6 +7,7 @@ import { Clapperboard } from 'lucide-react';
 import { UserButton } from '@clerk/nextjs';
 async function Action() {
     const user=await currentUser();
+    
   return (
     <div className='flex item-center justify-end gap-x-2 ml-4 lg:ml-0'>
      {!user && (<SignInButton>

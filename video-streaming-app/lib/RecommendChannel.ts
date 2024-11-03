@@ -20,7 +20,7 @@ const RecommendChannel=async()=>{
           [
             {
               $match: {
-                clerkId:{ $ne: 'user_2nq4xPw6NbEZVrHXcSJSBm3ZGas'}
+                clerkId:{ $ne: currUser.clerkId}
               }
             },
               {
