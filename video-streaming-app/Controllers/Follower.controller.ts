@@ -14,9 +14,12 @@ export const isfollowing=async(id:string)=>{
    }
    try {
       const otherUser=await UserModel.findById(id);
+      if(!otherUser){
+        throw new Error("user doesn't exist")
+      }
       const following=await FollowerModel.findOne({
-        follower:currUser,
-        Channel:otherUser
+        follower:currUser._id,
+        Channel:otherUser?._id,
       });
       if(following){
         return true;

@@ -3,18 +3,18 @@ import mongoose,{Schema,Document,Types} from "mongoose";
 import { User } from "./User.mode";
 interface Follower extends Document{
     _id: string,
-    follower:User,
-    Channel:User
+    followerId:Types.ObjectId,
+    ChannelId:Types.ObjectId
 }
 const FollowerSchema:Schema<Follower>=new Schema(
     {
-        follower:{
+        followerId:{
             type:Schema.Types.ObjectId,
             ref:'User',
             required:true
             
         },
-        Channel:{
+        ChannelId:{
             type:Schema.Types.ObjectId,
             ref:'User',
             required:true
