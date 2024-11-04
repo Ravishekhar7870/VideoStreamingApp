@@ -6,8 +6,9 @@ import { toast } from 'sonner'
 interface ActionProps{
     isfollow?:boolean
     id:string
+    isLoggedin?:boolean
 }
-function Action({isfollow,id}:ActionProps) {
+function Action({isfollow,id,isLoggedin}:ActionProps) {
     const [isPending,startTransition]=useTransition()
     const OnFollow=async()=>{
         startTransition(()=>{
@@ -41,7 +42,7 @@ function Action({isfollow,id}:ActionProps) {
         }
     }
   return (
-    <Button disabled={isPending }  variant='primary' onClick={Onclick}>
+    <Button disabled={isPending || !isLoggedin }  variant='primary' onClick={Onclick}>
         {isfollow? "Unfollow":"Follow"}
     </Button>
   )

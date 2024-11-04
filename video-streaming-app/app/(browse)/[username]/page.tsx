@@ -3,6 +3,7 @@ import { getReqUser } from '@/Controllers/User.controller';
 import { notFound } from 'next/navigation';
 import React from 'react'
 import Action from './_component/Action';
+import getUser from '@/lib/GetUser';
 
 interface UserPageProps{
     params:{
@@ -11,6 +12,11 @@ interface UserPageProps{
 }
 async function UserPage({params}:UserPageProps) {
   const user= await getReqUser(params.username)
+  const CurrUser=await getUser();
+  let isLoggedin=false;
+  if(CurrUser){
+    isLoggedin=true;
+  }
   if(!user){
     notFound()
   }
@@ -20,7 +26,7 @@ async function UserPage({params}:UserPageProps) {
       <p>Username is:{user.username}</p>
       <p>ClerkId is:{user.clerkId}</p>
       <p>is following {`${isfollow}`}</p>
-      <Action id={user._id} isfollow={isfollow}/>
+      <Action id={user._id} isfollow={isfollow} isLoggedin={isLoggedin}/>
       </div>
       
   )

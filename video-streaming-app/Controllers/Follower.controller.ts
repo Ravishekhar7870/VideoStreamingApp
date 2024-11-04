@@ -9,7 +9,9 @@ export const isfollowing=async(id:string)=>{
     }
    await DbConect();
    const currUser=await getUser();
-   
+   if(!currUser){
+    return;
+   }
    if (id.toString() === currUser._id.toString()) {
     return true;
 }
@@ -65,6 +67,9 @@ export const follow=async(id:string)=>{
 export const unfollowUser=async(id:string)=>{
    await DbConect();
    const currUser=await getUser();
+  if(!currUser){
+    return;
+  }
    if (id.toString() === currUser._id.toString()) {
      throw new Error("cannot unfollow yourself")
 }
@@ -85,6 +90,9 @@ export const unfollowUser=async(id:string)=>{
 export const getFollowedChannel=async()=>{
    await DbConect();
    const currUser=await getUser();
+   if(!currUser){
+    return [];
+   }
    try {
     const FollowedChannel=await FollowerModel.aggregate([
           {
