@@ -82,3 +82,39 @@ export const unfollowUser=async(id:string)=>{
     throw new Error(error.message)
    }
 }
+export const getFollowedChannel=async()=>{
+   await DbConect();
+   const currUser=await getUser();
+   try {
+    const FollowedChannel=await FollowerModel.aggregate([
+          {
+           $match:{
+             followerId:currUser._id
+           }
+          },
+          {
+          $lookup: {
+           from: "users",
+           localField:"ChannelId",
+           foreignField:"_id",
+           as: "Channel"
+         }
+       },
+       {
+         $addFields: {
+           Channel:{
+             $arrayElemAt:["$Channel",0]
+           }
+         }
+       },
+       {
+        $project: {
+          Channel:1
+       }
+      }
+    ])
+    return FollowedChannel
+   } catch (error) {
+    throw new Error("Something went wrong")
+   }
+}
