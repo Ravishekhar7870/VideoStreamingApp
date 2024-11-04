@@ -2,6 +2,7 @@
 import { useSelector, UseSelector } from "react-redux";
 import { SideBarSliceActions } from "@/Store/SideBarSlice";
 import { RecommendedSkelton } from "./Recommended";
+import { FollowedListSkelton } from "./FollowedList";
 
 interface WrapperProps{
     children:React.ReactNode;
@@ -30,6 +31,7 @@ export const SidebarSkelton=()=>{
       isCollapsed ? 'w-16' : 'w-60'
     }`}>
       <RecommendedSkelton/>
+      <FollowedListSkelton/>
     </aside>
   )
 }

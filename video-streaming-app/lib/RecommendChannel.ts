@@ -7,12 +7,7 @@ const RecommendChannel=async()=>{
   } catch (error:any) {
     throw new Error(error.message)
   }
-  let currUser;
-   try {
-    currUser=await getUser();
-   } catch (error) {
-    currUser=null
-   }
+  const currUser=await getUser();
    
   if(currUser){
     try {
@@ -20,9 +15,29 @@ const RecommendChannel=async()=>{
       const Users=await UserModel.aggregate(
           [
             {
-              $match: {
-                clerkId:{ $ne: currUser.clerkId}
+              $lookup:{
+                from:"followers",
+                let:{userId:"$_id"},
+                pipeline:[
+                  {
+                    $match:{
+                      $expr:{
+                        $and:[
+                          {$eq:["$followerId",currUser._id]},
+                          {$eq:["$ChannelId","$$userId"]}
+                        ]
+                      }
+                    }
+                  }
+                ],
+                as:"isFollowed"
               }
+            },
+            {
+                 $match:{
+                  isFollowed:{$size:0},
+                  _id: { $ne: currUser._id }
+                 }
             },
               {
                 $sort: {
