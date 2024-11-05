@@ -54,7 +54,10 @@ export const BlockUser=async(id:string)=>{
         BlockedUserId:UsertoBeBlocked._id,
         BlockerUserId:LoggedinUser?._id
      })
-     return blockedRelation
+     if(blockedRelation){
+        return blockedRelation
+     }
+     
    } catch (error) {
     throw new Error("something went wrong")
    }
