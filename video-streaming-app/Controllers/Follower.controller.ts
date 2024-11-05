@@ -95,11 +95,37 @@ export const getFollowedChannel=async()=>{
    }
    try {
     const FollowedChannel=await FollowerModel.aggregate([
+          
+            {
+              $lookup:{
+                from:"blockeds",
+                let:{userId:"$ChannelId"},
+                pipeline:[
+                  {
+                    $match:{
+                      $expr:{
+                        $and:[
+                          {$eq:["$BlockedUserId",currUser._id]},
+                          {$eq:["$BlockerUserId","$$userId"]}
+                        ]
+                      }
+                    }
+                  }
+                ],
+                as:"isblocked"
+              }
+            },
+            {
+              $match:{
+                isblocked:{$size:0}
+              }
+            },
           {
            $match:{
              followerId:currUser._id
            }
-          },
+          }
+          ,
           {
           $lookup: {
            from: "users",

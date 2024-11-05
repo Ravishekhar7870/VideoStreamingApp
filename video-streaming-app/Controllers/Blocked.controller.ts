@@ -43,7 +43,7 @@ export const BlockUser=async(id:string)=>{
      if(UsertoBeBlocked._id===LoggedinUser?._id){
         throw new Error("you can't block ourself")
      }
-     const existingBlocked=await BlockedModel.create({
+     const existingBlocked=await BlockedModel.findOne({
         BlockedUserId:UsertoBeBlocked._id,
         BlockerUserId:LoggedinUser?._id
      })
@@ -73,7 +73,7 @@ export const UnBlockUser=async(id:string)=>{
     if(!UsertoBeUnBlocked){
         throw new Error("User doesn't exist")
     }
-    const isBlocked=await  BlockedModel.findOneAndDelete({
+    const isBlocked=await  BlockedModel.findOne({
         BlockedUserId:UsertoBeUnBlocked._id,
         BlockerUserId:LoggedinUser._id
    })

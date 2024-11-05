@@ -10,14 +10,16 @@ export const BlockUserAction=async(id:string)=>{
             return;
         }
         const blockUser=await BlockUser(id)
+        console.log(blockUser);
         revalidatePath('/')
         if(blockUser){
             const getUser=await UserModel.findById(blockUser.BlockedUserId)
+            
             revalidatePath(`/${getUser?.username}`)
             return getUser?.username
         }
-    } catch (error) {
-        throw new Error("something went wrong")
+    } catch (error:any) {
+        throw new Error(error.message)
     }
     
 }

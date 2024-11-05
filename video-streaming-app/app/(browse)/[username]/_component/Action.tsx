@@ -1,4 +1,5 @@
 'use client'
+import { BlockUserAction, UnBlockUserAction } from '@/Actions/Blocked.actions'
 import { followUser, Unfollow } from '@/Actions/follow.actions'
 import { Button } from '@/components/ui/button'
 import React, { useTransition } from 'react'
@@ -41,10 +42,26 @@ function Action({isfollow,id,isLoggedin}:ActionProps) {
             OnFollow();
         }
     }
+    const onBlock=()=>{
+        startTransition(()=>{
+            BlockUserAction(id)
+            .then((data)=>{
+                toast.success(`Successfully blocked ${data}`)
+            })
+            .catch(()=>{
+                toast.error('something went wrong')
+            })
+        })
+    }
   return (
+    <>
     <Button disabled={isPending || !isLoggedin }  variant='primary' onClick={Onclick}>
         {isfollow? "Unfollow":"Follow"}
     </Button>
+    <Button onClick={onBlock}>
+        UnBlock
+    </Button>
+    </>
   )
 }
 
