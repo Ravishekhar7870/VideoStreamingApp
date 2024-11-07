@@ -1,8 +1,13 @@
 import React from 'react'
+import Wrapper from './Wrapper'
+import Toggle from './Toggle'
 
 function Sidebar() {
   return (
-    <div>Sidebar</div>
+    <Wrapper>
+        <Toggle/>
+        
+        </Wrapper>
   )
 }
 
