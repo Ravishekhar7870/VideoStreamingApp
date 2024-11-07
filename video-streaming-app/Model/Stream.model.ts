@@ -23,7 +23,7 @@ const StreamSchema:Schema<Stream>=new Schema({
        },
        ingressId:{
         type:String,
-        unique:true
+        
        },
        serverKey:{
         type:String
@@ -59,4 +59,5 @@ StreamSchema.index({name:'text',desription:'text'})
 StreamSchema.index({UserId:1},{unique:true})
 StreamSchema.index({ingressId:1})
 const StreamModel= (mongoose.models.Stream as mongoose.Model<Stream>)  || mongoose.model<Stream>('Stream',StreamSchema)
+StreamModel.syncIndexes().catch(err => console.error('Failed to sync indexes:', err));
 export default StreamModel

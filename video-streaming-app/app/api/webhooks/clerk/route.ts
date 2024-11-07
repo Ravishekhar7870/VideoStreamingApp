@@ -56,6 +56,7 @@ export async function POST(req: Request) {
          UserId:createUser._id,
          name:`${payload.data.username}'s stream`
        })
+      
        
      } catch (error:any) {
       return new Response(error?.message,{status:500})
