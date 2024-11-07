@@ -1,7 +1,7 @@
 
 import mongoose,{Schema,Document,Types} from "mongoose";
 import { User } from "./User.mode";
-interface Follower extends Document{
+ interface Follower extends Document{
     _id: string,
     followerId:Types.ObjectId,
     ChannelId:Types.ObjectId
