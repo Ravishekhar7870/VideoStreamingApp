@@ -34,7 +34,7 @@ export default function RootLayout({
     <ClerkProvider appearance={{baseTheme:shadesOfPurple}}
     
     >
-    <html lang="en">
+    <html lang="en" className="dark">
    
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}

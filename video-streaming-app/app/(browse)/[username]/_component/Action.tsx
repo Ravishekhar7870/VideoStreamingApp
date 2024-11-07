@@ -44,7 +44,7 @@ function Action({isfollow,id,isLoggedin}:ActionProps) {
     }
     const onBlock=()=>{
         startTransition(()=>{
-            BlockUserAction(id)
+            UnBlockUserAction(id)
             .then((data)=>{
                 toast.success(`Successfully blocked ${data}`)
             })
@@ -58,7 +58,7 @@ function Action({isfollow,id,isLoggedin}:ActionProps) {
     <Button disabled={isPending || !isLoggedin }  variant='primary' onClick={Onclick}>
         {isfollow? "Unfollow":"Follow"}
     </Button>
-    <Button onClick={onBlock}>
+    <Button disabled={isPending || !isLoggedin} onClick={onBlock}>
         UnBlock
     </Button>
     </>
