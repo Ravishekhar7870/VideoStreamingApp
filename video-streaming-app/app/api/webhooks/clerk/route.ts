@@ -3,6 +3,7 @@ import { headers } from 'next/headers'
 import { WebhookEvent } from '@clerk/nextjs/server'
 import DbConect from '@/lib/Dbconnect'
 import UserModel from '@/Model/User.mode'
+import StreamModel from '@/Model/Stream.model'
 export async function POST(req: Request) {
     const WEBHOOK_SECRET = process.env.CLERK_WEBHOOKS_SECRET
 
@@ -50,6 +51,10 @@ export async function POST(req: Request) {
          clerkId:payload.data.id,
          username:payload.data.username,
          ProfilePic:payload.data.image_url
+       })
+       const createStream=await StreamModel.create({
+         UserId:createUser._id,
+         name:`${payload.data.username}'s stream`
        })
        
      } catch (error:any) {
