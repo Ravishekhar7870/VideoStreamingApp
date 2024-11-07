@@ -34,7 +34,7 @@ function Toggle() {
       {isCollapsed && (
         
               <Button variant='ghost'
-              className='h-auto p-2 ml-auto'
+              className='h-auto p-2 ml-auto hidden sm:block'
               >
                 <ArrowRightFromLine className='h-4 w-4' onClick={handleArrowClick} />
                 </Button>
