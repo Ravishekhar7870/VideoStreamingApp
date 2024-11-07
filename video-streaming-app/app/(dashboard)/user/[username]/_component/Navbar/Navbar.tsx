@@ -11,7 +11,7 @@ function Navbar
         GOLIVE!
         </span>
         
-        <Search/>
+        
         <Action/>
     </nav>
   )
