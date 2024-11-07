@@ -55,5 +55,8 @@ const StreamSchema:Schema<Stream>=new Schema({
 
 },
 {timestamps:true})
+StreamSchema.index({name:'text',desription:'text'})
+StreamSchema.index({UserId:1},{unique:true})
+StreamSchema.index({ingressId:1})
 const StreamModel= (mongoose.models.Stream as mongoose.Model<Stream>)  || mongoose.model<Stream>('Stream',StreamSchema)
 export default StreamModel
