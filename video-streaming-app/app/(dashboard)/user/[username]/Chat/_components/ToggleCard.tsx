@@ -1,5 +1,6 @@
 'use client'
 import { UpdateUserStreamAction } from '@/Actions/Stream.actions'
+import { Skeleton } from '@/components/ui/skeleton'
 import { Switch } from '@/components/ui/switch'
 import React, { useTransition } from 'react'
 import { toast } from 'sonner'
@@ -36,6 +37,11 @@ function ToggleCard({field,label,value}:ToggleCardProps) {
         </div>
         </div>
   )
+}
+export const ToggleCardSkelton=()=>{
+    return (
+        <Skeleton className='rounded-xl p-10 w-full'/>
+    )
 }
 
 export default ToggleCard

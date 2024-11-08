@@ -23,6 +23,8 @@ async function page() {
         </div>
         <div className='space-y-4'>
          <ToggleCard field='isChatEnabled' label="Enable Chat" value={userStream.isChatEnabled}/>
+         <ToggleCard field='isChatSlowed' label="Slow Chat" value={userStream.isChatSlowed}/>
+         <ToggleCard field='isChatFollowerOnly' label="Follower Only" value={userStream.isChatFollowerOnly}/>
         </div>
         </div>
   )
