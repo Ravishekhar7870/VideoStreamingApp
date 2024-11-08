@@ -1,6 +1,16 @@
+import { getUserStream } from '@/Controllers/Stream.controller';
+import getUser from '@/lib/GetUser'
 import React from 'react'
 
-function page() {
+async function page() {
+    const User=await getUser();
+    if(!User){
+        throw new Error("Not Authorized")
+    }
+    const userStream=await getUserStream(User?._id)
+    if(!userStream){
+        throw new Error("No Stream Available")
+    }
   return (
     <div className='p-6 pl-24'>
         <div className='mb-4'>
