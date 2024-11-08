@@ -35,9 +35,18 @@ export const UpdateUserStrean=async(values:Partial<Stream>)=>{
        isChatSlowed:values.isChatSlowed,
        isChatFollowerOnly:values.isChatFollowerOnly,
      }
-     userStream.isChatEnabled=validData.isChatEnabled;
-     userStream.isChatSlowed=validData.isChatSlowed;
-     userStream.isChatFollowerOnly=validData.isChatFollowerOnly;
+    
+     if (validData.isChatEnabled !== undefined) {
+        userStream.isChatEnabled = validData.isChatEnabled;
+      }
+      
+      if (validData.isChatSlowed !== undefined) {
+        userStream.isChatSlowed = validData.isChatSlowed;
+      }
+      
+      if (validData.isChatFollowerOnly !== undefined) {
+        userStream.isChatFollowerOnly = validData.isChatFollowerOnly;
+      }
      await userStream.save({validateBeforeSave:false})
      revalidatePath(`/${CurrUser.username}`);
      revalidatePath(`/user/${CurrUser.username}`)

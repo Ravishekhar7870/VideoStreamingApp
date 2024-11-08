@@ -1,3 +1,4 @@
+
 import { getUserStream } from '@/Controllers/Stream.controller';
 import getUser from '@/lib/GetUser'
 import React from 'react'
@@ -12,6 +13,7 @@ async function page() {
     if(!userStream){
         throw new Error("No Stream Available")
     }
+   
   return (
     <div className='p-6 pl-24'>
         <div className='mb-4'>
