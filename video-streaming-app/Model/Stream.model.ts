@@ -1,5 +1,5 @@
 import mongoose,{Schema,Document,Types} from "mongoose";
-interface Stream extends Document{
+export interface Stream extends Document{
     id:string
     thumbnail?:string
     name:string

@@ -1,6 +1,7 @@
 import { getUserStream } from '@/Controllers/Stream.controller';
 import getUser from '@/lib/GetUser'
 import React from 'react'
+import ToggleCard from './_components/ToggleCard';
 
 async function page() {
     const User=await getUser();
@@ -17,6 +18,9 @@ async function page() {
           <h1 className='text-2xl font-bold'>
             Chat Setting
           </h1>
+        </div>
+        <div className='space-y-4'>
+         <ToggleCard field='isChatEnabled' label="Enable Chat" value={userStream.isChatEnabled}/>
         </div>
         </div>
   )
