@@ -4,6 +4,7 @@ import UrlCard from './_components/UrlCard'
 import getUser from '@/lib/GetUser'
 import { getUserStream } from '@/Controllers/Stream.controller';
 import KeyCard from './_components/KetCard';
+import ConnectModal from './_components/ConnectModal';
 
 async function page() {
     const user=await getUser();
@@ -20,9 +21,7 @@ async function page() {
    <h1 className='text-2xl font-bold'>
       Keys and Url
    </h1>
-   <Button variant='primary'>
-      Generate
-   </Button>
+    <ConnectModal/>
    
     </div>
     <div className='space-y-4'>
