@@ -3,6 +3,7 @@ import React from 'react'
 import UrlCard from './_components/UrlCard'
 import getUser from '@/lib/GetUser'
 import { getUserStream } from '@/Controllers/Stream.controller';
+import KeyCard from './_components/KetCard';
 
 async function page() {
     const user=await getUser();
@@ -26,6 +27,7 @@ async function page() {
     </div>
     <div className='space-y-4'>
      <UrlCard value={userStream.serverUrl}/>
+     <KeyCard value={userStream.serverKey}/>
    </div>
     </div>
   )
