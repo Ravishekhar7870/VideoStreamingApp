@@ -4,6 +4,7 @@ import React from 'react'
 import Navbar from './_component/Navbar/Navbar'
 import Sidebar from './_component/Sidebar/Sidebar'
 import ReduxLayout from './ReduxLayout'
+import Container from './Container'
 interface layoutProps{
     params:{username:string}
     children:React.ReactNode
@@ -19,7 +20,9 @@ async function layout({children,params}:layoutProps) {
        <Navbar/>
        <div className='flex h-full pt-20'>
         <Sidebar/>
+        <Container>
         {children}
+        </Container>
         </div>
         </ReduxLayout>
         </>

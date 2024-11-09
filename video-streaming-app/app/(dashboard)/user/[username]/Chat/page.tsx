@@ -15,7 +15,7 @@ async function page() {
     }
    
   return (
-    <div className='p-6 pl-24'>
+    <div className='p-6 pl-4'>
         <div className='mb-4'>
           <h1 className='text-2xl font-bold'>
             Chat Setting
