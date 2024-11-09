@@ -19,7 +19,7 @@ function CopyItem({value}:CopyItemProps) {
     }
     const Icon=isCopied ? CheckCheck :Copy
   return (
-     <Button>
+     <Button onClick={onClick} variant='ghost' size='sm' disabled={!value || isCopied}>
       <Icon className='h-4 w-4'/>
      </Button>
   )
