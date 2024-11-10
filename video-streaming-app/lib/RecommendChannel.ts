@@ -62,7 +62,22 @@ const RecommendChannel=async()=>{
               $match:{
                 isblocked:{$size:0}
               }
-            }
+            },
+            {
+              $lookup: {
+                from: 'streams',
+                localField: '_id',
+                foreignField:'UserId',
+                as: 'stream'
+              }
+           },
+           {
+             $addFields: {
+               stream: {
+                 $arrayElemAt:['$stream',0]
+               }
+             }
+           }
              , {
                 $sort: {
                   createdAt:1
@@ -81,6 +96,22 @@ const RecommendChannel=async()=>{
     
       const Users=await UserModel.aggregate(
           [
+            {
+              $lookup: {
+                from: 'streams',
+                localField: '_id',
+                foreignField:'UserId',
+                as: 'stream'
+              }
+           },
+           {
+             $addFields: {
+               stream: {
+                 $arrayElemAt:['$stream',0]
+               }
+             }
+           }
+            ,
               {
                 $sort: {
                   createdAt:1

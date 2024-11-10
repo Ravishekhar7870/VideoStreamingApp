@@ -145,7 +145,22 @@ export const getFollowedChannel=async()=>{
         $project: {
           Channel:1
        }
-      }
+      },
+      {
+        $lookup: {
+          from: 'streams',
+          localField: 'Channel._id',
+          foreignField:'UserId',
+          as: 'stream'
+        }
+     },
+     {
+       $addFields: {
+         stream: {
+           $arrayElemAt:['$stream',0]
+         }
+       }
+     }
     ])
     return FollowedChannel
    } catch (error) {

@@ -3,12 +3,15 @@ import { User } from '@/Model/User.mode'
 import React from 'react'
 import { useSelector } from 'react-redux'
 import UserItem, { UserItemSkelton } from './UserItem'
+import { Stream } from '@/Model/Stream.model'
 interface Followed{
     id:string,
     Channel:User
 }
 interface followList{
-    data:(Followed)[]
+    data:(Followed &{
+        stream:Stream | null
+    })[]
 }
 function FollowedList({data}:followList) {
     const isCollapsed=useSelector((store:any)=>store.sidebar.isCollapsed);
@@ -31,7 +34,7 @@ function FollowedList({data}:followList) {
         <ul className='space-y-2 px-2'>
         {
                 data.map((user)=>(
-                    <UserItem key={user.Channel._id} username={user.Channel.username}  imageUrl={user.Channel.ProfilePic}
+                    <UserItem key={user.Channel._id} username={user.Channel.username}  imageUrl={user.Channel.ProfilePic} isLive={user.stream?.isLive}
                     />
                 ))
              }

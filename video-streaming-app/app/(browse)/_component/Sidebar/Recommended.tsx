@@ -3,8 +3,11 @@ import { User } from '@/Model/User.mode';
 import React from 'react'
 import { useSelector } from 'react-redux';
 import UserItem, { UserItemSkelton } from './UserItem';
+import { Stream } from '@/Model/Stream.model';
 interface RecommendedProps{
-    data:User[]
+    data:(User &{
+      stream:Stream | null;
+    })[]
 }
 
 function Recommended({data}:RecommendedProps) {
@@ -23,7 +26,7 @@ function Recommended({data}:RecommendedProps) {
            <ul className='space-y-2 px-2'>
              {
                 data.map((user)=>(
-                    <UserItem key={user.clerkId} username={user.username} isLive={true} imageUrl={user.ProfilePic}
+                    <UserItem key={user.clerkId} username={user.username} isLive={user?.stream?.isLive} imageUrl={user.ProfilePic}
                     />
                 ))
              }
