@@ -8,11 +8,13 @@ import { userAgent } from 'next/server'
 const roomService=new RoomServiceClient(
     process.env.LIVEKIT_API_URL!,
     process.env.LIVEKIT_API_KEY!,
-    process.env.LIVEKIT_SECRET_KEY!
+    process.env.LIVEKIT_SECRET_KEY!,
 )
 
-const ingressclient=new IngressClient(process.env.LIVEKIT_API_URL!)
+
+const ingressclient=new IngressClient(process.env.LIVEKIT_API_URL!,process.env.LIVEKIT_API_KEY!,process.env.LIVEKIT_SECRET_KEY!)
 export const ResetIngress=async(hostIdentiy:string)=>{
+ 
   const ingresses=await ingressclient.listIngress({
     roomName:hostIdentiy
   })
@@ -26,18 +28,19 @@ export const ResetIngress=async(hostIdentiy:string)=>{
     }
   }
 };
-const CreateIngress=async(ingressType:IngressInput)=>{
+export const CreateIngress=async(ingressType:IngressInput)=>{
    const user=await getUser();
    if(!user){
     throw new Error("no Authorized")
    }
-   await ResetIngress(user._id)
+  
   const options:CreateIngressOptions={
     name:user?.username,
-    roomName:user?._id,
+    roomName:JSON.stringify(user?._id),
     participantName:user?.username,
-    participantIdentity:user?._id
+    participantIdentity:JSON.stringify(user?._id)
   };
+  await ResetIngress(JSON.stringify(user?._id))
   if(ingressType===IngressInput.WHIP_INPUT){
     options.enableTranscoding=true;
   }
@@ -67,5 +70,5 @@ const CreateIngress=async(ingressType:IngressInput)=>{
   userStream.serverKey=ingress.streamKey
  await userStream.save({validateBeforeSave:false})
  revalidatePath(`/user/${user.username}/Keys`)
- return ingress
+ 
 }
