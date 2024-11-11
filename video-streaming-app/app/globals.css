@@ -16,7 +16,10 @@ body {
     text-wrap: balance;
   }
 }
-
+.scrollbar-hidden {
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none; /* Firefox */
+}
 @layer base {
   :root {
     --background: 0 0% 100%;

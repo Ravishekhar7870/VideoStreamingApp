@@ -1,6 +1,6 @@
 'use client'
 import React from 'react'
-import { useUser } from '@clerk/nextjs'
+
 import { usePathname } from 'next/navigation'
 import {
   Fullscreen,
@@ -9,32 +9,35 @@ import {
   Users
 } from 'lucide-react'
 import NavItem, { NavItemSkelton } from './NavItem'
-function Navigation() {
-    const {user}=useUser();
+interface NavigationProps{
+    username?:string
+}
+function Navigation({username}:NavigationProps) {
+   
     const pathname=usePathname()
     const Routes=[
         {
             label:'Stream',
-            href:`/user/${user?.username}`,
+            href:`/user/${username}`,
             icon:Fullscreen
         },
         {
             label:'Keys',
-            href:`/user/${user?.username}/Keys`,
+            href:`/user/${username}/Keys`,
             icon:KeyRound
         },
         {
             label:'Chat',
-            href:`/user/${user?.username}/Chat`,
+            href:`/user/${username}/Chat`,
             icon:MessageSquare
         },
         {
             label:'Community',
-            href:`/user/${user?.username}/Community`,
+            href:`/user/${username}/Community`,
             icon:Users
         }
     ]
-    if(!user?.username){
+    if(!username){
         return (
             <ul className='space-y-2'>
              {

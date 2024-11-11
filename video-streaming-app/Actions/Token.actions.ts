@@ -24,7 +24,9 @@ export const CreateViewerToken=async(HostId:string)=>{
    if(isBlocked){
     throw new Error("Streamer has Blocked you")
    }
-   const isHost=host._id===LoggedinUser._id
+   const isHost=JSON.stringify(LoggedinUser._id)===JSON.stringify(host._id)
+   
+   
    const token=new AccessToken(process.env.LIVEKIT_API_KEY,process.env.LIVEKIT_SECRET_KEY
     ,{
         identity: isHost ? `self${String(LoggedinUser._id)}` : String(LoggedinUser._id),
