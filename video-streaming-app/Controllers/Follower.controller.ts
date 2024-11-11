@@ -160,6 +160,14 @@ export const getFollowedChannel=async()=>{
            $arrayElemAt:['$stream',0]
          }
        }
+     },
+     {
+       $project:{
+        Channel:1,
+        stream:{
+          isLive:1
+        }
+       }
      }
     ])
     return FollowedChannel

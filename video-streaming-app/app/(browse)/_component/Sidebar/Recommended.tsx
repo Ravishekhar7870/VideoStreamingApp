@@ -14,6 +14,7 @@ function Recommended({data}:RecommendedProps) {
     const isCollapsed=useSelector((store:any)=> store.sidebar.isCollapsed)
     const show=!isCollapsed && data.length>0;
     
+    
     return (
         <div >
            {show &&

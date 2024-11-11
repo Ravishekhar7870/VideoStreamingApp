@@ -78,6 +78,14 @@ const RecommendChannel=async()=>{
                }
              }
            }
+           ,{
+              $project:{
+                _id:1,username:1,clerkId:1,ProfilePic:1,
+                stream:{
+                  isLive:1
+                }
+              }
+           }
              , {
                 $sort: {
                   createdAt:1
