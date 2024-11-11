@@ -1,8 +1,8 @@
 import mongoose,{Schema,Document,Types} from "mongoose";
 export interface Stream extends Document{
-    id:string
+    id?:string
     thumbnail?:string
-    name:string
+    name?:string
     ingressId?:string
     serverUrl?:string
     serverKey?:string
@@ -10,7 +10,7 @@ export interface Stream extends Document{
     isChatSlowed?:boolean
     isChatFollowerOnly?:boolean
     isChatEnabled?:boolean
-    UserId:Types.ObjectId
+    UserId?:Types.ObjectId
 }
 const StreamSchema:Schema<Stream>=new Schema({
        thumbnail:{
