@@ -1,8 +1,29 @@
 import React from 'react'
-
-function page() {
+import { currentUser } from '@clerk/nextjs/server'
+import { getReqUser } from '@/Controllers/User.controller';
+import StreamModel from '@/Model/Stream.model';
+import StreamPlayer from '@/components/StreamPlayer';
+interface PageProps{
+  params:{
+    username:string
+  }
+}
+async function page({params}:PageProps) {
+  const loggedinUser=await currentUser();
+  const reqUser=await getReqUser(params.username)
+  if(!reqUser || !loggedinUser || reqUser.clerkId!==loggedinUser.id){
+    throw new Error("Not Authorized")
+  }
+  const getstream=await StreamModel.findOne({
+    UserId:reqUser._id
+  })
+  if(!getstream){
+    throw new Error("no Stream found")
+  }
   return (
-    <div>page</div>
+    <div className='h-full'>
+       <StreamPlayer user={reqUser} stream={getstream} isFollowing={true}/>
+    </div>
   )
 }
 
