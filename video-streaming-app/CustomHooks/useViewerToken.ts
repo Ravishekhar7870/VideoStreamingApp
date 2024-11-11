@@ -2,7 +2,7 @@ import { toast } from "sonner";
 import {jwtDecode,JwtPayload} from 'jwt-decode'
 import { useEffect, useState } from "react";
 import { CreateViewerToken } from "@/Actions/Token.actions";
-export const useViewerToken=async(hostIdentity:string)=>{
+export const useViewerToken=(hostIdentity:string)=>{
     const [token,setToken]=useState("")
     const [identity,setIdentity]=useState("")
     const [name,setName]=useState("")
@@ -11,20 +11,22 @@ export const useViewerToken=async(hostIdentity:string)=>{
          try {
             const getToken=await CreateViewerToken(hostIdentity)
             setToken(getToken)
-            const decodeToken=await jwtDecode(getToken) as JwtPayload & {name?:string}
+            const decodeToken= jwtDecode(getToken) as JwtPayload & {name?:string,identity?:string}
             const name=decodeToken?.name;
+            
             if(name){
                setName(name)
             }
-            const identity=decodeToken.jti
+            const identity=decodeToken.sub
             if(identity){
                setIdentity(identity)
             }
          } catch (error) {
             throw new Error("something went wrong")
          }
-      createToken()
+      
      }
+     createToken();
     },[hostIdentity])
     return {
         token,identity,name

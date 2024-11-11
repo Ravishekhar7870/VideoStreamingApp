@@ -1,3 +1,5 @@
+'use server'
+
 import { v4 } from "uuid";
 import { AccessToken } from "livekit-server-sdk";
 import getUser from "@/lib/GetUser";
@@ -25,7 +27,7 @@ export const CreateViewerToken=async(HostId:string)=>{
    const isHost=host._id===LoggedinUser._id
    const token=new AccessToken(process.env.LIVEKIT_API_KEY,process.env.LIVEKIT_SECRET_KEY
     ,{
-        identity:isHost ? `self ${JSON.stringify(LoggedinUser._id)}` : JSON.stringify(LoggedinUser._id),
+        identity: isHost ? `self${String(LoggedinUser._id)}` : String(LoggedinUser._id),
         name:LoggedinUser.username
     }
    )
