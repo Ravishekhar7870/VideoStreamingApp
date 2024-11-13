@@ -2,6 +2,7 @@
 import { Skeleton } from '@/components/ui/skeleton'
 import React from 'react'
 import ChatToggle from './Chat-Toggle'
+import ChatVariantToggle from './ChatVariantToggle'
 
 function ChatHeader() {
   return (
@@ -12,6 +13,9 @@ function ChatHeader() {
       <p className='font-semibold text-primary text-center'>
         Chat
       </p>
+      <div className='absolute right-2 top-2'>
+        <ChatVariantToggle/>
+      </div>
     </div>
   )
 }
