@@ -7,6 +7,7 @@ import {LiveKitRoom} from '@livekit/components-react'
 import React from 'react'
 import VideoPlayer from './VideoPlayer'
 import { useSelector } from 'react-redux'
+import Chat from './Chat'
 interface StreamPlayerProps{
     user:User,
     stream:Stream,
@@ -31,7 +32,17 @@ function StreamPlayer({user,stream,isFollowing}:StreamPlayerProps) {
     <div className='space-y-4 col-span-1 lg:col-span-2 xl:col-span-2 2xl:col-span-5 lg:overflow-y-auto pb-10 scrollbar-hidden'>
      <VideoPlayer hostname={user.username} hostId={user._id}/>
     </div>
-     
+     <div className={`col-span-1 ${isChatCollpased && 'hidden'}`}>
+        <Chat
+        name={name}
+        hostName={user.username}
+        hostIdentity={user._id}
+        isFollowing={isFollowing}
+        isChatEnabled={stream.isChatEnabled}
+        isChatFollowerOnly={stream.isChatFollowerOnly}
+        isChatSlowed={stream.isChatSlowed}
+        />
+     </div>
    </LiveKitRoom>
    </>
   )
