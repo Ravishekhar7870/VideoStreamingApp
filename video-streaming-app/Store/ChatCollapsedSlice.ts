@@ -9,11 +9,11 @@ const ChatCollapsedSlice=createSlice({
     reducers:{
         ChangeState:(state)=>{
           state.isCollapsed=!state.isCollapsed
-          localStorage.setItem("isDashboardCollapsed", JSON.stringify(state.isCollapsed)); 
+          localStorage.setItem("isChatCollapsed", JSON.stringify(state.isCollapsed)); 
         },
         setCollapseAsTrue:(state)=>{
             state.isCollapsed=true;
-            localStorage.setItem("isDashboardCollapsed", JSON.stringify(state.isCollapsed))
+            localStorage.setItem("isChatCollapsed", JSON.stringify(state.isCollapsed))
         }
     }
 })

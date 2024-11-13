@@ -3,11 +3,12 @@
 import { useViewerToken } from '@/CustomHooks/useViewerToken'
 import { Stream } from '@/Model/Stream.model'
 import { User } from '@/Model/User.mode'
-import {LiveKitRoom} from '@livekit/components-react'
+import { LiveKitRoom} from '@livekit/components-react'
 import React from 'react'
 import VideoPlayer from './VideoPlayer'
 import { useSelector } from 'react-redux'
 import Chat from './Chat'
+import ChatToggle from './Chat-Toggle'
 interface StreamPlayerProps{
     user:User,
     stream:Stream,
@@ -25,6 +26,13 @@ function StreamPlayer({user,stream,isFollowing}:StreamPlayerProps) {
     
   return (
    <>
+   {isChatCollpased && (
+    <div className='hidden lg:block fiexd top-[100px] right-2 z-50'>
+      
+      <ChatToggle/>
+      
+    </div>
+   )}
    <LiveKitRoom token={token} serverUrl={process.env.NEXT_PUBLIC_LIVEKIT_WEBSOCKET_URL}
    className={`grid grid-cols-1 lg:gap-y-0 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-6 h-full 
      ${isChatCollpased && 'lg:grid-cols-2 xl:grid-cols-2 2xl:grid:cols-2'}`}
@@ -34,7 +42,7 @@ function StreamPlayer({user,stream,isFollowing}:StreamPlayerProps) {
     </div>
      <div className={`col-span-1 ${isChatCollpased && 'hidden'}`}>
         <Chat
-        name={name}
+        Viewername={name}
         hostName={user.username}
         hostIdentity={user._id}
         isFollowing={isFollowing}
