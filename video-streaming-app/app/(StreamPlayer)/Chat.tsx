@@ -1,9 +1,10 @@
-import { ChatCollapsedSliceActions } from '@/Store/ChatCollapsedSlice';
+import { ChatCollapsedSliceActions, ChatVariant } from '@/Store/ChatCollapsedSlice';
 import { useChat, useConnectionState, useRemoteParticipant } from '@livekit/components-react'
 import { ConnectionState } from 'livekit-client';
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import ChatHeader from './ChatHeader';
+import ChatForm from './ChatForm';
 interface ChatProps{
     Viewername?:string,
     hostName?:string,
@@ -16,7 +17,7 @@ interface ChatProps{
 function Chat({Viewername,hostName,hostIdentity,isFollowing,isChatEnabled,isChatFollowerOnly,isChatSlowed}:ChatProps) {
     const connectionState=useConnectionState();
     const Participants=useRemoteParticipant(JSON.stringify(hostIdentity))
-    const isChatCollpased=useSelector((store:any)=> store.ChatCollapsed.isCollapsed)
+    const {isChatCollpased,variant}=useSelector((store:any)=> store.ChatCollapsed)
     const dispatch=useDispatch();
     const isOnline=Participants && connectionState===ConnectionState.Connected
     const isHidden=!isChatEnabled || !isOnline
@@ -49,6 +50,24 @@ function Chat({Viewername,hostName,hostIdentity,isFollowing,isChatEnabled,isChat
   return (
     <div className='flex flex-col bg-background border-l border-b pt-0 h-[calc(100vh-80px)]'>
        <ChatHeader/>
+       {
+        variant===ChatVariant.CHAT && (
+            <>
+             <ChatForm onSubmit={OnSubmit} onChange={OnChange} value={Value} isFollowerOnly={isChatFollowerOnly}
+             isSlowed={isChatSlowed} isFollowing={isFollowing} isHidden={isHidden}
+             />
+            </>
+        )
+       }
+       {
+        variant===ChatVariant.COMMUNITY && (
+            <>
+            <p>
+                Community
+            </p>
+            </>
+        )
+       }
     </div>
   )
 }
