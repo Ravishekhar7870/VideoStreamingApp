@@ -1,3 +1,4 @@
+import { Info } from 'lucide-react'
 import React, { useMemo } from 'react'
 interface ChatInfoProps{
     isSlowed?:boolean,
@@ -20,6 +21,7 @@ function ChatInfo({isSlowed,isFollowersOnly}:ChatInfoProps) {
     }
   return (
     <div className='p-2 text-muted-foreground bg-white/5 border border-white/10 w-full rounded-t-md flex items-center gap-x-2'>
+        <Info/>
      <p className='text-xs font-semibold'>
         {label}
      </p>

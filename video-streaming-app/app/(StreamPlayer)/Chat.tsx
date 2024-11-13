@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import ChatHeader from './ChatHeader';
 import ChatForm from './ChatForm';
+import ChatList from './ChatList';
 interface ChatProps{
     Viewername?:string,
     hostName?:string,
@@ -53,6 +54,7 @@ function Chat({Viewername,hostName,hostIdentity,isFollowing,isChatEnabled,isChat
        {
         variant===ChatVariant.CHAT && (
             <>
+            <ChatList messages={chatMessages} isHidden={isHidden}/>
              <ChatForm onSubmit={OnSubmit} onChange={OnChange} value={Value} isFollowerOnly={isChatFollowerOnly}
              isSlowed={isChatSlowed} isFollowing={isFollowing} isHidden={isHidden}
              />
