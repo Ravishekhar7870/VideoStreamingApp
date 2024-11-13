@@ -2,7 +2,7 @@ import React from 'react'
 import { currentUser } from '@clerk/nextjs/server'
 import { getReqUser } from '@/Controllers/User.controller';
 import StreamModel from '@/Model/Stream.model';
-import StreamPlayer from '@/components/StreamPlayer';
+import StreamPlayer from '@/app/(StreamPlayer)/StreamPlayer';
 interface PageProps{
   params:{
     username:string

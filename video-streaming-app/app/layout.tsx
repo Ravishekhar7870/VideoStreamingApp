@@ -6,6 +6,7 @@ import { shadesOfPurple } from "@clerk/themes";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "sonner";
 import "./globals.css";
+import ReduxLayout from "./ReduxLayout";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -46,7 +47,9 @@ export default function RootLayout({
         storageKey="GoLive"
         >
         <Toaster theme='light' position='bottom-center'/>
+        <ReduxLayout>
         {children}
+        </ReduxLayout>
         </ThemeProvider>
       </body>
      

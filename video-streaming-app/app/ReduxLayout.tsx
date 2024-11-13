@@ -1,7 +1,10 @@
 'use client'
-import React from 'react'
-import { Provider } from 'react-redux'
-import AppStore from '@/Store'
+import AppStore from "@/Store";
+import React from "react";
+import { Provider } from "react-redux";
+
+
+
 function ReduxLayout({children}:{children:React.ReactNode}) {
   return (
     <Provider store={AppStore}>

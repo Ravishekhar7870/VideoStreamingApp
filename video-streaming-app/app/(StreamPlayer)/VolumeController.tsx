@@ -1,6 +1,6 @@
 import { Volume1,Volume2,VolumeX } from "lucide-react";
 import React from 'react'
-import { Slider } from "./ui/slider";
+import { Slider } from "../../components/ui/slider";
 interface VolumeControllerProps{
     onToggle:()=> void,
     onChange:(value:number)=> void,

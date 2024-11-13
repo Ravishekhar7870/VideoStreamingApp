@@ -3,7 +3,7 @@ import { redirect } from 'next/navigation'
 import React from 'react'
 import Navbar from './_component/Navbar/Navbar'
 import Sidebar from './_component/Sidebar/Sidebar'
-import ReduxLayout from './ReduxLayout'
+
 import Container from './Container'
 interface layoutProps{
     params:{username:string}
@@ -16,7 +16,7 @@ async function layout({children,params}:layoutProps) {
     }
   return (
     <> 
-    <ReduxLayout>
+   
        <Navbar/>
        <div className='flex h-full pt-20'>
         <Sidebar/>
@@ -24,7 +24,7 @@ async function layout({children,params}:layoutProps) {
         {children}
         </Container>
         </div>
-        </ReduxLayout>
+       
         </>
   )
 }
