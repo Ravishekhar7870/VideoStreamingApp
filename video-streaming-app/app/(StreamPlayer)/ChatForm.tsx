@@ -3,6 +3,7 @@ import { Input } from '@/components/ui/input'
 import { Skeleton } from '@/components/ui/skeleton'
 import React from 'react'
 import { useState } from 'react'
+import ChatInfo from './ChatInfo'
 interface ChatFormProps{
     onSubmit:()=> void,
     onChange:(value:string)=>void,
@@ -39,6 +40,7 @@ function ChatForm({onSubmit,onChange,value,isFollowerOnly,isSlowed,isFollowing,i
   return (
     <form onSubmit={onSendMessage} className='flex flex-col item-center gap-y-4 p-3'>
         <div className='w-full'>
+          <ChatInfo isFollowersOnly={isFollowerOnly} isSlowed={isSlowed}/>
         <Input onChange={(e)=>onChange(e.target.value)} value={value} placeholder='Send Message' disabled={isDisabled}
         className={`border-white/10 ${isFollowerOnly && 'rounded-t-none border-t-0'}`} 
          />
