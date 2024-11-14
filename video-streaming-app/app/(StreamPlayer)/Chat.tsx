@@ -1,7 +1,7 @@
 import { ChatCollapsedSliceActions, ChatVariant } from '@/Store/ChatCollapsedSlice';
 import { useChat, useConnectionState, useRemoteParticipant } from '@livekit/components-react'
 import { ConnectionState } from 'livekit-client';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import ChatHeader from './ChatHeader';
 import ChatForm from './ChatForm';
@@ -48,13 +48,16 @@ function Chat({Viewername,hostName,hostIdentity,isFollowing,isChatEnabled,isChat
     const OnChange=(value:string)=>{
         setValue(value)
     }
+    const sortedMessages=useMemo(()=>{
+        return chatMessages.sort((a,b)=> b.timestamp-a.timestamp)
+    },[chatMessages])
   return (
     <div className='flex flex-col bg-background border-l border-b pt-0 h-[calc(100vh-80px)]'>
        <ChatHeader/>
        {
         variant===ChatVariant.CHAT && (
             <>
-            <ChatList messages={chatMessages} isHidden={isHidden}/>
+            <ChatList messages={sortedMessages} isHidden={isHidden}/>
              <ChatForm onSubmit={OnSubmit} onChange={OnChange} value={Value} isFollowerOnly={isChatFollowerOnly}
              isSlowed={isChatSlowed} isFollowing={isFollowing} isHidden={isHidden}
              />

@@ -1,5 +1,7 @@
+
 import { ReceivedChatMessage } from '@livekit/components-react'
 import React from 'react'
+import ShowMessage from './ShowMessage'
 interface ChatListProps{
     messages:ReceivedChatMessage[],
     isHidden?:boolean
@@ -15,7 +17,13 @@ function ChatList({messages,isHidden}:ChatListProps) {
         )
     }
   return (
-    <div>ChatList</div>
+    <div className='flex flex-1 flex-col-reverse overflow-y-auto p-3 h-full'>
+     {
+      messages.map((mess)=>(
+        <ShowMessage key={mess.timestamp}  data={mess}/>
+      ))
+     }
+    </div>
   )
 }
 
