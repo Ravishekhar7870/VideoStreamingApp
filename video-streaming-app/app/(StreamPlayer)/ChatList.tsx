@@ -27,7 +27,7 @@ function ChatList({messages,isHidden}:ChatListProps) {
     </div>
   )
 } 
-export const chatSkelton=()=>{
+export const ChatListSkelton=()=>{
   return (
     <div className='flex h-full item-center justify-center'>
       <Skeleton className='w-1/2 h-6'/>

@@ -3,10 +3,11 @@ import { useChat, useConnectionState, useRemoteParticipant } from '@livekit/comp
 import { ConnectionState } from 'livekit-client';
 import React, { useEffect, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import ChatHeader from './ChatHeader';
-import ChatForm from './ChatForm';
+import ChatHeader, { ChatHeaderSkelton } from './ChatHeader';
+import ChatForm, { ChatFormSkelton } from './ChatForm';
 import ChatList from './ChatList';
 import ChatCommunity from './ChatCommunity';
+import {ChatListSkelton} from './ChatList'
 interface ChatProps{
     Viewername?:string,
     hostName?:string,
@@ -75,5 +76,13 @@ function Chat({Viewername,hostName,hostIdentity,isFollowing,isChatEnabled,isChat
     </div>
   )
 }
-
+export const ChatSkelton=()=>{
+  return (
+    <div className='flex flex-col border-l border-b pt-0 h-[calc(100vh-8opx)] border-2'>
+      <ChatHeaderSkelton/>
+      <ChatListSkelton/>
+      <ChatFormSkelton/>
+    </div>
+  )
+}
 export default Chat
