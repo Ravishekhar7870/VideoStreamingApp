@@ -5,6 +5,8 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { useParticipants } from '@livekit/components-react';
 import React, { useState } from 'react'
 import { useDebounceValue } from 'usehooks-ts';
+import CommunityItem from './CommunityItem';
+
 interface ChatCommunityProps{
     Viewername?:string,
     hostName?:string,
@@ -29,13 +31,13 @@ function ChatCommunity({Viewername,hostName,isHidden}:ChatCommunityProps) {
   return (
     <div className='p-4'>
      <Input className='border-white/10' placeholder='Search Community' onChange={(e)=> onChange(e.target.value)}/>
-     <ScrollArea className='gap-y-2 mt-4'>
+     <ScrollArea className='gap-y-4 mt-4'>
       <p className='text-center text-sm text-muted-foreground hidden last:block p-2'>
         No results
       </p>
       {
         Participants.map((participants)=>(
-            <CommunityItem 
+            <CommunityItem
              key={participants.identity}
              Viewername={Viewername}
              hostName={hostName}
