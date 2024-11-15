@@ -3,9 +3,10 @@
 import { Input } from '@/components/ui/input';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { useParticipants } from '@livekit/components-react';
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import { useDebounceValue } from 'usehooks-ts';
 import CommunityItem from './CommunityItem';
+import { LocalParticipant, RemoteParticipant } from 'livekit-client';
 
 interface ChatCommunityProps{
     Viewername?:string,
@@ -14,11 +15,23 @@ interface ChatCommunityProps{
 }
 function ChatCommunity({Viewername,hostName,isHidden}:ChatCommunityProps) {
     const [value,setValue]=useState("");
-    const debouncedValue=useDebounceValue(value,500)
+  
     const Participants=useParticipants();
     const onChange=(newValue:string)=>{
         setValue(newValue)
     }
+    const filteredParticipants=useMemo(()=>{
+        const deduped=Participants.reduce((acc,partcipants)=>{
+            const hostAsViewwer=`host-${String(partcipants.identity)}`
+            if(!acc.some((p)=> p.identity===hostAsViewwer)){
+                acc.push(partcipants)
+            }
+            return acc;
+        } ,[] as (RemoteParticipant | LocalParticipant)[] )
+        return deduped.filter((participant)=>{
+            return participant?.name?.toLowerCase().includes(value.toLowerCase());
+        })
+    },[Participants])
     if(isHidden){
         return (
             <div className='flex flex-1 items-center justify-center'>
@@ -28,6 +41,7 @@ function ChatCommunity({Viewername,hostName,isHidden}:ChatCommunityProps) {
             </div>
         )
     }
+   
   return (
     <div className='p-4'>
      <Input className='border-white/10' placeholder='Search Community' onChange={(e)=> onChange(e.target.value)}/>
@@ -36,7 +50,7 @@ function ChatCommunity({Viewername,hostName,isHidden}:ChatCommunityProps) {
         No results
       </p>
       {
-        Participants.map((participants)=>(
+        filteredParticipants.map((participants)=>(
             <CommunityItem
              key={participants.identity}
              Viewername={Viewername}

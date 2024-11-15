@@ -36,15 +36,15 @@ function CommunityItem({Viewername,hostName,ParticipantName,ParticipantIdentity}
         <p style={{color:color}}>
             {ParticipantName}
         </p>
-        {/* {
-            host && !self && ( */}
+        {
+            host && !self && (
                 <HoverHint hintText='Block' >
                 <Button className='h-auto w-auto p-1 opacity-0 group-hover:opacity-100 transition' onClick={BlockUser} disabled={isPending} >
                   <MinusCircle className='h-4 w-4 text-muted-foreground'/>
                 </Button>
                 </HoverHint>
-            {/* ) */}
-        {/* } */}
+            )
+            }
     </div>
   )
 }
