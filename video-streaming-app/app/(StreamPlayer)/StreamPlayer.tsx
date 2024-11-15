@@ -9,6 +9,7 @@ import VideoPlayer, { VideoSkelton } from './VideoPlayer'
 import { useSelector } from 'react-redux'
 import Chat, { ChatSkelton } from './Chat'
 import ChatToggle from './Chat-Toggle'
+import Header from './Header'
 interface StreamPlayerProps{
     user:User,
     stream:Stream,
@@ -17,7 +18,7 @@ interface StreamPlayerProps{
 function StreamPlayer({user,stream,isFollowing}:StreamPlayerProps) {
     const {token,name,identity} = useViewerToken(user._id)
     const isChatCollpased=useSelector((store:any)=> store.ChatCollapsed.isCollapsed)
-    console.log("identity",identity)
+   
     if(!token || !name || !identity){
         return (
             <StreamPlayerSkelton/>
@@ -39,6 +40,15 @@ function StreamPlayer({user,stream,isFollowing}:StreamPlayerProps) {
    >
     <div className='space-y-4 col-span-1 lg:col-span-2 xl:col-span-2 2xl:col-span-5 lg:overflow-y-auto pb-10 scrollbar-hidden'>
      <VideoPlayer hostname={user.username} hostId={user._id}/>
+     <Header
+     hostname={user.username}
+     hostId={user._id}
+     Viewername={name}
+     ProfilePic={user.ProfilePic}
+     ViewerId={identity}
+     isFollowing={isFollowing}
+     StreamName={stream.name}
+     />
     </div>
      <div className={`col-span-1 ${isChatCollpased && 'hidden'}`}>
         <Chat
