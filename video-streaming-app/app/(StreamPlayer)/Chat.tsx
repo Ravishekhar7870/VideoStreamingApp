@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import ChatHeader from './ChatHeader';
 import ChatForm from './ChatForm';
 import ChatList from './ChatList';
+import ChatCommunity from './ChatCommunity';
 interface ChatProps{
     Viewername?:string,
     hostName?:string,
@@ -67,9 +68,7 @@ function Chat({Viewername,hostName,hostIdentity,isFollowing,isChatEnabled,isChat
        {
         variant===ChatVariant.COMMUNITY && (
             <>
-            <p>
-                Community
-            </p>
+            <ChatCommunity Viewername={Viewername} hostName={hostName} isHidden={isHidden} />
             </>
         )
        }
