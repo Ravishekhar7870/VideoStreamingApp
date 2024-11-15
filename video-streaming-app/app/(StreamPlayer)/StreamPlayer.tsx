@@ -45,7 +45,7 @@ function StreamPlayer({user,stream,isFollowing}:StreamPlayerProps) {
      hostId={user._id}
      Viewername={name}
      ProfilePic={user.ProfilePic}
-     ViewerId={identity}
+     ViewerIdentity={identity}
      isFollowing={isFollowing}
      StreamName={stream.name}
      />

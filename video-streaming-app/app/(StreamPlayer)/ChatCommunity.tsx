@@ -22,8 +22,8 @@ function ChatCommunity({Viewername,hostName,isHidden}:ChatCommunityProps) {
     }
     const filteredParticipants=useMemo(()=>{
         const deduped=Participants.reduce((acc,partcipants)=>{
-            const hostAsViewwer=`host-${String(partcipants.identity)}`
-            if(!acc.some((p)=> p.identity===hostAsViewwer)){
+            const hostAsViewwer=`self${String(partcipants.identity)}`
+            if(!acc.some((p)=> p.identity===JSON.stringify(hostAsViewwer))){
                 acc.push(partcipants)
             }
             return acc;
