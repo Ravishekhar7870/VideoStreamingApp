@@ -47,6 +47,9 @@ export const UpdateUserStrean=async(values:Partial<Stream>)=>{
       if (validData.isChatFollowerOnly !== undefined) {
         userStream.isChatFollowerOnly = validData.isChatFollowerOnly;
       }
+      if(validData.name){
+        userStream.name=validData.name
+      }
      await userStream.save({validateBeforeSave:false})
      revalidatePath(`/${CurrUser.username}`);
      revalidatePath(`/user/${CurrUser.username}`)
