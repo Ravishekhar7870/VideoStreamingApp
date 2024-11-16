@@ -10,6 +10,7 @@ import { useSelector } from 'react-redux'
 import Chat, { ChatSkelton } from './Chat'
 import ChatToggle from './Chat-Toggle'
 import Header from './Header'
+import InfoCard from './InfoCard'
 interface StreamPlayerProps{
     user:User,
     stream:Stream,
@@ -48,6 +49,12 @@ function StreamPlayer({user,stream,isFollowing}:StreamPlayerProps) {
      ViewerIdentity={identity}
      isFollowing={isFollowing}
      StreamName={stream.name}
+     />
+     <InfoCard
+     hostId={user._id}
+     ViewerIdentity={identity}
+     Streamname={stream.name}
+     thumbnailUrl={stream.thumbnail}
      />
     </div>
      <div className={`col-span-1 ${isChatCollpased && 'hidden'}`}>

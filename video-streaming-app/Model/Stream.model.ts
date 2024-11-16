@@ -2,7 +2,7 @@ import mongoose,{Schema,Document,Types} from "mongoose";
 export interface Stream extends Document{
     id?:string
     thumbnail?:string
-    name?:string
+    name:string
     ingressId?:string
     serverUrl?:string
     serverKey?:string
