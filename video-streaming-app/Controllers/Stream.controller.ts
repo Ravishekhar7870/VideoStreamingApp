@@ -58,3 +58,23 @@ export const UpdateUserStrean=async(values:Partial<Stream>)=>{
     throw new Error("something went wrong")
    }
 }
+export const RemoveThumbnail=async()=>{
+    await DbConect()
+    try {
+      const LoggedinUser=await getUser()
+      if(!LoggedinUser){
+        throw new Error("not Authorizes")
+      }
+      const getStream=await StreamModel.findOne({
+        UserId:LoggedinUser._id
+      })
+      if(!getStream){
+        throw new Error("No Stream found")
+      }
+      getStream.thumbnail="";
+      await getStream.save({validateBeforeSave:false})
+      return LoggedinUser.username
+    } catch (error) {
+      throw new Error('Something went wrong')
+    }
+}

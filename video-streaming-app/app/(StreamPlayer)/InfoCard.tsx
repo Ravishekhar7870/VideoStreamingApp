@@ -3,6 +3,7 @@ import { Pencil } from 'lucide-react'
 import Image from 'next/image'
 import React from 'react'
 import InfoModal from './InfroModal'
+
 interface InfoCardProps{
     hostId?:string,
      ViewerIdentity?:string,
@@ -48,7 +49,7 @@ function InfoCard({hostId,ViewerIdentity,Streamname,thumbnailUrl}:InfoCardProps)
                 </h3>
                 {thumbnailUrl && (
                     <div className='relative aspect-video rounded-md overflow-hidden width-[200px] border border-white/10'>
-                        <Image fill src={thumbnailUrl} alt={Streamname}/>
+                        <Image fill src={thumbnailUrl} alt={Streamname} className='object-cover'/>
                         </div>
                 )}
             </div>
