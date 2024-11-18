@@ -1,5 +1,6 @@
 import { Divide } from 'lucide-react'
 import React from 'react'
+import BioModal from './BioModal'
 interface AboutCardProps{
     hostName:string,
      ViewerIdentity:string,
@@ -20,7 +21,7 @@ function AboutCard({hostId,hostName,ViewerIdentity,bio,followerCount}:AboutCardP
             About {hostName}
         </div>
           {isHost && (
-            <p>Edit</p>
+            <BioModal bio={bio}/>
           )}
           </div>
           <div className='text-sm text-muted-foreground'>

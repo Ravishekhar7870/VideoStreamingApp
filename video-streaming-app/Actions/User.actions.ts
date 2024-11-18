@@ -3,7 +3,7 @@
 import { updateUserbio } from "@/Controllers/User.controller"
 import { revalidatePath } from "next/cache";
 
-const updateUserbioAction=async(bio:string)=>{
+export const updateUserbioAction=async(bio:string)=>{
     try {
         const user=await updateUserbio(bio);
         if(user){

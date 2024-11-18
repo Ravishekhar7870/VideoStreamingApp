@@ -16,9 +16,7 @@ interface StreamPlayerProps{
     user:User,
     stream:Stream,
     isFollowing:boolean,
-    getFollowerCount:{
-      FollowerCount:number
-    }[]
+    getFollowerCount:number
 }
 function StreamPlayer({user,stream,isFollowing,getFollowerCount}:StreamPlayerProps) {
     const {token,name,identity} = useViewerToken(user._id)
@@ -65,7 +63,7 @@ function StreamPlayer({user,stream,isFollowing,getFollowerCount}:StreamPlayerPro
      ViewerIdentity={identity}
      hostId={user._id}
      bio={user.bio}
-     followerCount={getFollowerCount[0].FollowerCount}
+     followerCount={getFollowerCount}
      />
     </div>
      <div className={`col-span-1 ${isChatCollpased && 'hidden'}`}>

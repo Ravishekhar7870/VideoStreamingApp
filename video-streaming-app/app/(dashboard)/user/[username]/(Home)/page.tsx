@@ -22,9 +22,11 @@ async function page({params}:PageProps) {
     throw new Error("no Stream found")
   }
   const getFollowerCount=await FollowerCount(reqUser._id);
+  const followercount= getFollowerCount.length===0 ? 0:getFollowerCount[0].FollowerCount;
+  
   return (
     <div className='h-full'>
-       <StreamPlayer user={reqUser} stream={getstream} isFollowing={true} getFollowerCount={getFollowerCount}/>
+       <StreamPlayer user={reqUser} stream={getstream} isFollowing={true} getFollowerCount={followercount}/>
     </div>
   )
 }
