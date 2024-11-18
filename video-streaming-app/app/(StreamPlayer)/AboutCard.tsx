@@ -26,8 +26,8 @@ function AboutCard({hostId,hostName,ViewerIdentity,bio,followerCount}:AboutCardP
           <div className='text-sm text-muted-foreground'>
            <span className='font-semibold text-primary'>
            {followerCount+1}
-           </span >
-           {label}
+           </span > {label}
+           
           </div>
           <p className='text-sm'>
             {bio || ""}
