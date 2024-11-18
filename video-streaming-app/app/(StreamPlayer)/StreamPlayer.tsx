@@ -11,6 +11,7 @@ import Chat, { ChatSkelton } from './Chat'
 import ChatToggle from './Chat-Toggle'
 import Header from './Header'
 import InfoCard from './InfoCard'
+import AboutCard from './AboutCard'
 interface StreamPlayerProps{
     user:User,
     stream:Stream,
