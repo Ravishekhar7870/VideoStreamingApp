@@ -175,3 +175,25 @@ export const getFollowedChannel=async()=>{
     throw new Error("Something went wrong")
    }
 }
+export const FollowerCount=async(id:string)=>{
+     await DbConect();
+     try {
+      const user=await UserModel.findById(id);
+      if(!user){
+        throw new Error("no user found")
+      }
+      const getFollowerCount=await FollowerModel.aggregate([
+        {
+          $match:{
+            ChannelId:user._id
+          }
+        },
+        {
+          $count:'FollowerCount'
+        }
+      ])
+      return getFollowerCount
+     } catch (error) {
+      throw new Error("Something went wrong")
+     }
+}

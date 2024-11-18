@@ -3,6 +3,7 @@ import { currentUser } from '@clerk/nextjs/server'
 import { getReqUser } from '@/Controllers/User.controller';
 import StreamModel from '@/Model/Stream.model';
 import StreamPlayer from '@/app/(StreamPlayer)/StreamPlayer';
+import { FollowerCount } from '@/Controllers/Follower.controller';
 interface PageProps{
   params:{
     username:string
@@ -20,9 +21,10 @@ async function page({params}:PageProps) {
   if(!getstream){
     throw new Error("no Stream found")
   }
+  const getFollowerCount=await FollowerCount(reqUser._id);
   return (
     <div className='h-full'>
-       <StreamPlayer user={reqUser} stream={getstream} isFollowing={true}/>
+       <StreamPlayer user={reqUser} stream={getstream} isFollowing={true} getFollowerCount={getFollowerCount}/>
     </div>
   )
 }

@@ -14,9 +14,12 @@ import InfoCard from './InfoCard'
 interface StreamPlayerProps{
     user:User,
     stream:Stream,
-    isFollowing:boolean
+    isFollowing:boolean,
+    getFollowerCount:{
+      FollowerCount:number
+    }[]
 }
-function StreamPlayer({user,stream,isFollowing}:StreamPlayerProps) {
+function StreamPlayer({user,stream,isFollowing,getFollowerCount}:StreamPlayerProps) {
     const {token,name,identity} = useViewerToken(user._id)
     const isChatCollpased=useSelector((store:any)=> store.ChatCollapsed.isCollapsed)
    
@@ -55,6 +58,13 @@ function StreamPlayer({user,stream,isFollowing}:StreamPlayerProps) {
      ViewerIdentity={identity}
      Streamname={stream.name}
      thumbnailUrl={stream.thumbnail}
+     />
+     <AboutCard
+     hostName={user.username}
+     ViewerIdentity={identity}
+     hostId={user._id}
+     bio={user.bio}
+     followerCount={getFollowerCount[0].FollowerCount}
      />
     </div>
      <div className={`col-span-1 ${isChatCollpased && 'hidden'}`}>
