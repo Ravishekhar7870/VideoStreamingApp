@@ -1,10 +1,13 @@
-import { isfollowing } from '@/Controllers/Follower.controller';
+import { FollowerCount, isfollowing } from '@/Controllers/Follower.controller';
 import { getReqUser } from '@/Controllers/User.controller';
 import { notFound } from 'next/navigation';
 import React from 'react'
 import Action from './_component/Action';
 import getUser from '@/lib/GetUser';
-import { isBlockedByUser } from '@/Controllers/Blocked.controller';
+import { isBlockedByUser, } from '@/Controllers/Blocked.controller';
+import { getUserStream } from '@/Controllers/Stream.controller';
+import StreamPlayer from '@/app/(StreamPlayer)/StreamPlayer';
+import { User } from 'lucide-react';
 
 interface UserPageProps{
     params:{
@@ -13,27 +16,25 @@ interface UserPageProps{
 }
 async function UserPage({params}:UserPageProps) {
   const user= await getReqUser(params.username)
-  const CurrUser=await getUser();
-  let isLoggedin=false;
-  if(CurrUser){
-    isLoggedin=true;
+  if(!user ){
+    notFound();
   }
-  if(!user){
-    notFound()
+  const stream=await getUserStream(user._id)
+  if(!stream){
+    notFound();
   }
-  const isfollow=await isfollowing(user._id)
-  const isBlocked=await isBlockedByUser(user._id)
-  if(isBlocked){
+  let isfollowingUser=await isfollowing(user._id);
+  if(isfollowingUser===undefined){
+    isfollowingUser=false;
+  }
+  const isblockedByUser=await isBlockedByUser(user._id);
+  const getFollowerCount=await FollowerCount(user._id);
+  const followercount= getFollowerCount.length===0 ? 0:getFollowerCount[0].FollowerCount;
+  if(isblockedByUser){
     notFound();
   }
   return (
-    <div className='flex flex-col gap-y-4'>
-      <p>Username is:{user.username}</p>
-      <p>ClerkId is:{user.clerkId}</p>
-      <p>is following {`${isfollow}`}</p>
-      <p>is Blocked {`${isBlocked}`}</p>
-      <Action id={user._id} isfollow={isfollow} isLoggedin={isLoggedin}/>
-      </div>
+    <StreamPlayer user={user} isFollowing={isfollowingUser} stream={stream} getFollowerCount={followercount} />
       
   )
 }

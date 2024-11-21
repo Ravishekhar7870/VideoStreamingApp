@@ -18,6 +18,7 @@ export const isfollowing=async(id:string)=>{
    try {
       const otherUser=await UserModel.findById(id);
       if(!otherUser){
+        return false;
         throw new Error("user doesn't exist")
       }
       const following=await FollowerModel.findOne({
@@ -31,7 +32,7 @@ export const isfollowing=async(id:string)=>{
         return false;
       }
    } catch (error:any) {
-    
+    return false;
     throw new Error(error.message)
    }
 }

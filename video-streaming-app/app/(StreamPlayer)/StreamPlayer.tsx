@@ -15,7 +15,7 @@ import AboutCard from './AboutCard'
 interface StreamPlayerProps{
     user:User,
     stream:Stream,
-    isFollowing:boolean,
+    isFollowing:boolean | false,
     getFollowerCount:number
 }
 function StreamPlayer({user,stream,isFollowing,getFollowerCount}:StreamPlayerProps) {
