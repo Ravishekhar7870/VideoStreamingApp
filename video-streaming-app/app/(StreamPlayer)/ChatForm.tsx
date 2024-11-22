@@ -15,7 +15,7 @@ interface ChatFormProps{
 }
 function ChatForm({onSubmit,onChange,value,isFollowerOnly,isSlowed,isFollowing,isHidden}:ChatFormProps) {
     const [isDelayedBlocked,setIsDelayedBlocked]=useState(false);
-    const isChatFollowerOnlyandUserisNotFollowing=isFollowing && !isFollowing
+    const isChatFollowerOnlyandUserisNotFollowing=isFollowerOnly && !isFollowing
     const isDisabled=isDelayedBlocked || isHidden || isChatFollowerOnlyandUserisNotFollowing
     const onSendMessage=(event:React.FormEvent<HTMLFormElement>)=>{
       event.preventDefault();
@@ -46,7 +46,7 @@ function ChatForm({onSubmit,onChange,value,isFollowerOnly,isSlowed,isFollowing,i
          />
          </div>
          <div className='ml-auto'>
-            <Button variant='primary' type='submit' disabled={isDisabled} size='sm' >
+            <Button variant='primary' type='submit' disabled={isDisabled || isChatFollowerOnlyandUserisNotFollowing} size='sm' >
                 Send
                 </Button>
          </div>

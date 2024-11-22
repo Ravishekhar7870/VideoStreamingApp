@@ -5,7 +5,13 @@ import { revalidatePath } from "next/cache"
 
 export const UpdateUserStreamAction=async(values:Partial<Stream>)=>{
     try {
-        const getStream=await UpdateUserStrean(values)
+        const getUser=await UpdateUserStrean(values)
+        if(getUser){
+       revalidatePath(`/${getUser.username}`);
+        revalidatePath(`/user/${getUser.username}`)
+        revalidatePath(`/user/${getUser.username}/Chat`)
+        }
+
     } catch (error) {
         throw new Error("something went wrong")
     }

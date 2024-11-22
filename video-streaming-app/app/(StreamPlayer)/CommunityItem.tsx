@@ -23,8 +23,8 @@ function CommunityItem({Viewername,hostName,ParticipantName,ParticipantIdentity}
                 return;
             }
             BlockUserAction(ParticipantIdentity)
-            .then((res)=>{
-                toast.success(`Blocked  ${res}`)
+            .then(()=>{
+                toast.success(`Sucessfully kicked out the user`)
             })
             .catch(()=>{
                 toast.error('something went wrong')

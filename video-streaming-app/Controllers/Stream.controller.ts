@@ -1,6 +1,7 @@
 import DbConect from "@/lib/Dbconnect";
 import getUser from "@/lib/GetUser";
 import StreamModel, { Stream } from "@/Model/Stream.model";
+import { currentUser } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
 export const getUserStream=async(id:string)=>{
   await DbConect();
@@ -51,9 +52,8 @@ export const UpdateUserStrean=async(values:Partial<Stream>)=>{
         userStream.name=validData.name
       }
      await userStream.save({validateBeforeSave:false})
-     revalidatePath(`/${CurrUser.username}`);
-     revalidatePath(`/user/${CurrUser.username}`)
-     revalidatePath(`/user/${CurrUser.username}/Chat`)
+     return CurrUser;
+     
    } catch (error) {
     throw new Error("something went wrong")
    }
