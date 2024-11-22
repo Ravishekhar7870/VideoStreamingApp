@@ -88,14 +88,14 @@ export const getStreamFeed=async()=>{
         {
           $lookup:{
             from:'blockeds',
-            let:{StreamerUserId:'$UserId'},
+            let:{streamerUserId:'$UserId'},
             pipeline:[
               {
                 $match:{
                   $expr:{
                     $and:[
                       {$eq:['$BlockedUserId',LoggedinUser._id]},
-                      {$eq:['$BlockerUserId','$$StreamerUserId']}
+                      {$eq:['$BlockerUserId','$$streamerUserId']}
                     ]
                   }
                 }
@@ -107,7 +107,8 @@ export const getStreamFeed=async()=>{
         },
         {
           $match:{
-            Blocked:{$size:0}
+            Blocked:{$size:0},
+            UserId: { $ne: LoggedinUser._id }
           }
         },
         {
