@@ -1,5 +1,6 @@
 import { getStreamFeed } from '@/Controllers/Stream.controller'
 import React from 'react'
+import Streamcard from './Streamcard';
 
 async function FeedResults() {
     const streamResult=await getStreamFeed();
@@ -18,9 +19,7 @@ async function FeedResults() {
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-x-4'>
              {
                 streamResult.map((stream)=>(
-                    <div key={stream._id}>
-                        {stream.name}
-                    </div>    
+                   <Streamcard key={stream._id} data={stream}/>    
                 ))
              }
         </div>
