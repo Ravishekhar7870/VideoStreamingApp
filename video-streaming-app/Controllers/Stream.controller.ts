@@ -78,3 +78,99 @@ export const RemoveThumbnail=async()=>{
       throw new Error('Something went wrong')
     }
 }
+export const getStreamFeed=async()=>{
+  await DbConect();
+  const LoggedinUser=await getUser();
+  let streams=[]
+  if(LoggedinUser){
+     streams=await StreamModel.aggregate(
+      [
+        {
+          $lookup:{
+            from:'blockeds',
+            let:{StreamerUserId:'$UserId'},
+            pipeline:[
+              {
+                $match:{
+                  $expr:{
+                    $and:[
+                      {$eq:['$BlockedUserId',LoggedinUser._id]},
+                      {$eq:['$BlockerUserId','$$StreamerUserId']}
+                    ]
+                  }
+                }
+              }
+            ],
+            as:'Blocked'
+
+          }
+        },
+        {
+          $match:{
+            Blocked:{$size:0}
+          }
+        },
+        {
+          $lookup: {
+            from: 'users',
+            localField: 'UserId',
+            foreignField:'_id' ,
+            as: 'User'
+          }
+        },
+         {
+           $addFields: {
+             User:{
+               $arrayElemAt:["$User",0]
+             }
+           }
+         },
+         {
+           $sort: {
+             isLive:-1,updatedAt:-1
+           }
+         },
+         {
+          $project: {
+            ingressId:0,
+            serverKey:0,
+            serverUrl:0
+          }
+        }
+      ]
+     )
+  }
+  else{
+   streams=await StreamModel.aggregate(
+    [{
+      $lookup: {
+        from: 'users',
+        localField: 'UserId',
+        foreignField:'_id' ,
+        as: 'User'
+      }
+    },
+     {
+       $addFields: {
+         User:{
+           $arrayElemAt:["$User",0]
+         }
+       }
+     },
+     {
+       $sort: {
+         isLive:-1,updatedAt:-1
+       }
+     },
+     {
+      $project: {
+        ingressId:0,
+        serverKey:0,
+        serverUrl:0
+      }
+    }
+    ]
+   )
+  }
+  return streams
+}
