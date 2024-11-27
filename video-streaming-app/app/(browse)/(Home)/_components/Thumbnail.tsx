@@ -1,5 +1,6 @@
 import ChannelAvatar from '@/components/Avatar';
 import { Avatar } from '@/components/ui/avatar';
+import { Skeleton } from '@/components/ui/skeleton';
 import Image from 'next/image';
 import React from 'react'
 interface ThumbnailProps{
@@ -31,6 +32,13 @@ function Thumbnail({src,fallback,username,isLive}:ThumbnailProps) {
          
         </div>
         {ImageToShow}
+    </div>
+  )
+}
+export const ThumbnailSkelton=()=>{
+  return (
+    <div className='group aspect-video relative rounded-md cursor-pointer'>
+      <Skeleton className='w-full h-full'/>
     </div>
   )
 }
