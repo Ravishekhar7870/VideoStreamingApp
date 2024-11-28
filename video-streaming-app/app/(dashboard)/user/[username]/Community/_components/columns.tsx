@@ -1,25 +1,27 @@
 "use client"
 
+import { Button } from "@/components/ui/button"
 import { ColumnDef } from "@tanstack/react-table"
 
-export type Payment = {
-  id: string
-  amount: number
-  status: "pending" | "processing" | "success" | "failed"
-  email: string
+export type BlockedUser = {
+  id:string,
+  userId:string,
+  ProfilePic:string,
+  username:string,
+  createdAt:string
 }
 
-export const columns: ColumnDef<Payment>[] = [
+export const columns: ColumnDef<BlockedUser>[] = [
   {
-    accessorKey: "status",
-    header: "Status",
+    accessorKey: "username",
+    header: "username",
   },
   {
-    accessorKey: "email",
-    header: "Email",
+    accessorKey: "createdAt",
+    header: "Blocked date",
   },
   {
-    accessorKey: "amount",
-    header: "Amount",
+    id:"actions",
+    cell:()=> <Button variant='primary'>Unblock</Button>,
   },
 ]

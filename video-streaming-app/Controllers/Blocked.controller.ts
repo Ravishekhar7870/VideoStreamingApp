@@ -89,3 +89,34 @@ export const UnBlockUser=async(id:string)=>{
     throw new Error("something went wrong")
    }
 }
+export const getblockedUser=async()=>{
+   await DbConect();
+   const LoggedinUser=await getUser();
+   if(!LoggedinUser){
+      throw new Error("Not Authorized")
+   }
+   const BlockedUser=await BlockedModel.aggregate([
+      {
+         $match:{
+            BlockerUserId:LoggedinUser._id
+         }
+      },
+      {
+         $lookup: {
+           from: 'users',
+           localField: 'BlockedUserId',
+           foreignField: '_id',
+           as: 'blockedUser'
+         }
+       },
+         {
+           $addFields: {
+             blockedUser:{
+               $arrayElemAt:['$blockedUser',0]
+             }
+           }
+         },
+
+   ])
+   return BlockedUser
+}
