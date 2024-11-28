@@ -5,7 +5,7 @@ import mongoose from "mongoose";
 const connection:ConnectionObj={}
 async function DbConect():Promise<void>{
    if(connection.isConnected){
-      console.log("Database already connectdd")
+    
       return;
    }
    try {
