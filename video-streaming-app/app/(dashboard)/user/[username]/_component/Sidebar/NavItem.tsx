@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button'
 import { Skeleton } from '@/components/ui/skeleton'
+import { RootState } from '@/Store'
 import { LucideIcon } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
@@ -11,7 +12,7 @@ interface NavItemProps{
     isActive:boolean
 }
 function NavItem({label,href,icon:Icon,isActive}:NavItemProps) {
-    const isCollapsed=useSelector((store:any)=> store.DashBoardsidebar.isCollapsed)
+    const isCollapsed=useSelector((store:RootState)=> store.DashBoardsidebar.isCollapsed)
   return (
     <Button asChild variant='ghost' className={`w-full h-12 ${isCollapsed ? 'justify-center' : 'justify-start'}
      ${isActive && 'bg-accent'}`}>

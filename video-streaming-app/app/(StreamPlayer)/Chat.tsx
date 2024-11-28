@@ -8,6 +8,7 @@ import ChatForm, { ChatFormSkelton } from './ChatForm';
 import ChatList from './ChatList';
 import ChatCommunity from './ChatCommunity';
 import {ChatListSkelton} from './ChatList'
+import { RootState } from '@/Store';
 interface ChatProps{
     Viewername?:string,
     hostName?:string,
@@ -20,7 +21,7 @@ interface ChatProps{
 function Chat({Viewername,hostName,hostIdentity,isFollowing,isChatEnabled,isChatFollowerOnly,isChatSlowed}:ChatProps) {
     const connectionState=useConnectionState();
     const Participants=useRemoteParticipant(JSON.stringify(hostIdentity))
-    const {isChatCollpased,variant}=useSelector((store:any)=> store.ChatCollapsed)
+    const {isCollapsed,variant}=useSelector((store:RootState)=> store.ChatCollapsed)
     const dispatch=useDispatch();
     const isOnline=Participants && connectionState===ConnectionState.Connected
     const isHidden=!isChatEnabled || !isOnline
@@ -28,7 +29,7 @@ function Chat({Viewername,hostName,hostIdentity,isFollowing,isChatEnabled,isChat
     const [Value,setValue]=useState("")
     useEffect(() => {
       const handleResize = () => {
-        if (!isChatCollpased && window.innerWidth <= 640) {
+        if (!isCollapsed && window.innerWidth <= 640) {
           dispatch(ChatCollapsedSliceActions.setCollapseAsTrue());
         }
       };
@@ -39,7 +40,7 @@ function Chat({Viewername,hostName,hostIdentity,isFollowing,isChatEnabled,isChat
     
       window.addEventListener('resize', handleResize);
       return () => window.removeEventListener('resize', handleResize);
-    }, [isChatCollpased, dispatch]);
+    }, [isCollapsed, dispatch]);
     const OnSubmit=()=>{
         if(!send){
             return;

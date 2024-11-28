@@ -12,6 +12,7 @@ import ChatToggle from './Chat-Toggle'
 import Header from './Header'
 import InfoCard from './InfoCard'
 import AboutCard from './AboutCard'
+import { RootState } from '@/Store'
 interface StreamPlayerProps{
     user:User,
     stream:Stream,
@@ -20,7 +21,7 @@ interface StreamPlayerProps{
 }
 function StreamPlayer({user,stream,isFollowing,getFollowerCount}:StreamPlayerProps) {
     const {token,name,identity} = useViewerToken(user._id)
-    const isChatCollpased=useSelector((store:any)=> store.ChatCollapsed.isCollapsed)
+    const isChatCollpased=useSelector((store:RootState)=> store.ChatCollapsed.isCollapsed)
    
     if(!token || !name || !identity){
         return (

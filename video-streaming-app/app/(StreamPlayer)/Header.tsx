@@ -1,6 +1,6 @@
 'use client'
 import ChannelAvatar from '@/components/Avatar'
-import { Avatar } from '@/components/ui/avatar'
+
 import { useParticipants, useRemoteParticipant } from '@livekit/components-react'
 import { UserIcon } from 'lucide-react'
 import React from 'react'
@@ -14,7 +14,7 @@ interface HeaderProps{
      isFollowing:boolean
      StreamName?:string
 }
-function Header({hostname,hostId,ViewerIdentity,Viewername,ProfilePic,isFollowing,StreamName}:HeaderProps) {
+function Header({hostname,hostId,ViewerIdentity,ProfilePic,isFollowing,StreamName}:HeaderProps) {
     const Participants=useParticipants()
     const hostasParticipant=useRemoteParticipant(JSON.stringify(hostId))
     const isLive=!!hostasParticipant

@@ -4,6 +4,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import UserItem, { UserItemSkelton } from './UserItem'
 import { Stream } from '@/Model/Stream.model'
+import { RootState } from '@/Store'
 interface Followed{
     id:string,
     Channel:User
@@ -14,7 +15,7 @@ interface followList{
     })[]
 }
 function FollowedList({data}:followList) {
-    const isCollapsed=useSelector((store:any)=>store.sidebar.isCollapsed);
+    const isCollapsed=useSelector((store:RootState)=>store.sidebar.isCollapsed);
     if(data.length<1){
         return null;
     }

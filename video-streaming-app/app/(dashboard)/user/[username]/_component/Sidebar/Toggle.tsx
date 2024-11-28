@@ -4,12 +4,13 @@ import { Button } from '@/components/ui/button'
 import { ArrowLeftFromLine, ArrowRightFromLine } from 'lucide-react'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { UseDispatch } from 'react-redux'
+
 
 import { useEffect } from 'react'
 import { DashBoardSideBarSliceActions } from '@/Store/DashBoardSidebarSlice'
+import { RootState } from '@/Store'
 function Toggle() {
-    const isCollapsed=useSelector((store:any)=>store.DashBoardsidebar.isCollapsed);
+    const isCollapsed=useSelector((store:RootState)=>store.DashBoardsidebar.isCollapsed);
     const dispatch=useDispatch();
     useEffect(() => {
       const handleResize = () => {

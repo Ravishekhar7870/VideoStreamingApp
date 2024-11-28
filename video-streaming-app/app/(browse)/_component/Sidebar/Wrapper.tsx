@@ -1,14 +1,15 @@
 'use client'
-import { useSelector, UseSelector } from "react-redux";
-import { SideBarSliceActions } from "@/Store/SideBarSlice";
+import { useSelector } from "react-redux";
+
 import { RecommendedSkelton } from "./Recommended";
 import { FollowedListSkelton } from "./FollowedList";
+import { RootState } from "@/Store";
 
 interface WrapperProps{
     children:React.ReactNode;
 }
 function Wrapper({children}:WrapperProps) {
-    const isCollapsed=useSelector((store:any)=> store.sidebar.isCollapsed)
+    const isCollapsed=useSelector((store:RootState)=> store.sidebar.isCollapsed)
 
   return (
     <aside
@@ -22,7 +23,7 @@ function Wrapper({children}:WrapperProps) {
   )
 }
 export const SidebarSkelton=()=>{
-  const isCollapsed=useSelector((store:any)=> store.sidebar.isCollapsed)
+  const isCollapsed=useSelector((store:RootState)=> store.sidebar.isCollapsed)
  
     
   

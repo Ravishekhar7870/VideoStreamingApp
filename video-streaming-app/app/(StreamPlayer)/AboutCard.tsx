@@ -1,4 +1,4 @@
-import { Divide } from 'lucide-react'
+
 import React from 'react'
 import BioModal from './BioModal'
 interface AboutCardProps{

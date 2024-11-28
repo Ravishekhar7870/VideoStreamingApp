@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button'
 import { useSelector } from 'react-redux'
 import Link from 'next/link'
 import ChannelAvatar from '@/components/Avatar'
+import { RootState } from '@/Store'
 interface UserItemProps{
     username:string
     imageUrl?:string
@@ -12,7 +13,7 @@ interface UserItemProps{
 }
 function UserItem({username,isLive,imageUrl}:UserItemProps) {
      const pathname=usePathname();
-     const isCollapsed=useSelector((store:any)=> store.sidebar.isCollapsed)
+     const isCollapsed=useSelector((store:RootState)=> store.sidebar.isCollapsed)
      const href=`/${username}`
      const iswatching=pathname===href
   return (

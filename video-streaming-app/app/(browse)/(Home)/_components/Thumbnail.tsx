@@ -1,5 +1,5 @@
 import ChannelAvatar from '@/components/Avatar';
-import { Avatar } from '@/components/ui/avatar';
+
 import { Skeleton } from '@/components/ui/skeleton';
 import Image from 'next/image';
 import React from 'react'

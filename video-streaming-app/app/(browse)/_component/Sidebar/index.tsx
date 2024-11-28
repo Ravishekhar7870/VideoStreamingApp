@@ -2,10 +2,10 @@
 
 import Wrapper from './Wrapper'
 import Toggle from './Toggle'
-import Recommended, { RecommendedSkelton } from './Recommended'
+import Recommended from './Recommended'
 import RecommendChannel from '@/lib/RecommendChannel'
 
-import { UseSelector } from 'react-redux'
+
 import { getFollowedChannel } from '@/Controllers/Follower.controller'
 import FollowedList from './FollowedList'
 async function Sidebar() {

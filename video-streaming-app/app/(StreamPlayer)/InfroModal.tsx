@@ -79,7 +79,7 @@ function InfoModal({StreamName,ThumbnailUrl}:InfoModalProps) {
                 <label>
                     Thumbnail
                 </label>
-                { ThumbnailUrl ? (
+                { newThumbnailUrl ? (
                   <div className='relative aspect-video rounded-xl overflow-hidden border border-white/10'>
                     <div className='absolute top-2 right-2 z-[10]'>
                         <HoverHint hintText='Remove Thumbnail' >
@@ -88,7 +88,7 @@ function InfoModal({StreamName,ThumbnailUrl}:InfoModalProps) {
                            </Button>
                         </HoverHint>
                         </div>
-                        <Image src={ThumbnailUrl} alt='Thumbnail' fill className='object-cover'/>
+                        <Image src={newThumbnailUrl} alt='Thumbnail' fill className='object-cover'/>
                     </div>
                 ):
             

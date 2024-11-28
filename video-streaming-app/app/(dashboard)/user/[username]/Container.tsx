@@ -1,11 +1,12 @@
 'use client'
+import { RootState } from '@/Store'
 import React from 'react'
-import { useSelector, UseSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 interface containerProps{
     children:React.ReactNode
 }
 function Container({children}:containerProps) {
-    const isCollapsed=useSelector((store:any)=> store.DashBoardsidebar.isCollapsed)
+    const isCollapsed=useSelector((store:RootState)=> store.DashBoardsidebar.isCollapsed)
   return (
     <div className={`flex-1 ${isCollapsed? 'ml-[70px]':'ml-[70px] lg:ml-60'}`}>
         {children}

@@ -5,9 +5,10 @@ import React from 'react'
 import Thumbnail, { ThumbnailSkelton } from '../../(Home)/_components/Thumbnail'
 import { formatDistanceToNow } from 'date-fns'
 import { Skeleton } from '@/components/ui/skeleton'
+import { Blocked } from '@/Model/Blocked.model'
 interface StreamWithUser extends Stream{
    User:User
-   Blocked?:Array<any>
+   Blocked?:Array<Blocked>
 }
 interface ResultCardprops{
     data:StreamWithUser

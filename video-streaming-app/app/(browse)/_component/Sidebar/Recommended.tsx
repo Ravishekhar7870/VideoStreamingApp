@@ -4,6 +4,7 @@ import React from 'react'
 import { useSelector } from 'react-redux';
 import UserItem, { UserItemSkelton } from './UserItem';
 import { Stream } from '@/Model/Stream.model';
+import { RootState } from '@/Store';
 interface RecommendedProps{
     data:(User &{
       stream:Stream | null;
@@ -11,7 +12,7 @@ interface RecommendedProps{
 }
 
 function Recommended({data}:RecommendedProps) {
-    const isCollapsed=useSelector((store:any)=> store.sidebar.isCollapsed)
+    const isCollapsed=useSelector((store:RootState)=> store.sidebar.isCollapsed)
     const show=!isCollapsed && data.length>0;
     
     

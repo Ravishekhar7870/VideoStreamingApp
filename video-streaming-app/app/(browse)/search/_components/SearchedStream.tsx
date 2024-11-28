@@ -20,7 +20,7 @@ async function SearchedStream({term}:SearchedStreamProps) {
             ) }
             <div className='flex flex-col gap-y-4'>
              {data.map((item)=>(
-                <Resultcard data={item} />
+                <Resultcard key={item._id} data={item} />
              ))}
             </div>
     </div>

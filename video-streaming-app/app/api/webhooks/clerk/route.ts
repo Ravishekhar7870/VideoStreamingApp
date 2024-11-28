@@ -52,14 +52,15 @@ export async function POST(req: Request) {
          username:payload.data.username,
          ProfilePic:payload.data.image_url
        })
-       const createStream=await StreamModel.create({
+       await StreamModel.create({
          UserId:createUser._id,
          name:`${payload.data.username}'s stream`
        })
       
        
-     } catch (error:any) {
-      return new Response(error?.message,{status:500})
+     } catch (error) {
+      console.error("Error updating user:", error); 
+      return new Response("something went wrong")
      }
      
   }
@@ -69,7 +70,7 @@ export async function POST(req: Request) {
        clerkId:clerkId
      })
      if(!currUser){
-     
+         
         return new Response("couldn't find  the user",{status:400})
      }
      if(currUser){
@@ -77,10 +78,11 @@ export async function POST(req: Request) {
         currUser.username=payload?.data?.username ;
         currUser.ProfilePic=payload?.data?.image_url;
         await currUser.save({validateBeforeSave:false})
-        const updatedUser=await UserModel.findById(currUser._id);
+        await UserModel.findById(currUser._id);
       
       } catch (error) {
-        return new Response("something went wrong",{status:500})
+        console.error("Error updating user:", error);  // Log the error for debugging
+        return new Response("Something went wrong", { status: 500 });
       }
      }
      
@@ -101,6 +103,7 @@ export async function POST(req: Request) {
         
        
        } catch (error) {
+        console.error("Error updating user:", error); 
           return new Response("something went wrong",{status:500})
        }
     }

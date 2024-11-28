@@ -1,15 +1,16 @@
 'use client'
 
 import { Button } from '@/components/ui/button'
-import { ArrowLeftFromLine, ArrowRightFromLine, MessageSquare, Users } from 'lucide-react'
+import {  MessageSquare, Users } from 'lucide-react'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 
 
 import { ChatCollapsedSliceActions, ChatVariant } from '@/Store/ChatCollapsedSlice'
+import { RootState } from '@/Store'
 function ChatVariantToggle() {
-    const variant=useSelector((store:any)=> store.ChatCollapsed.variant)
+    const variant=useSelector((store:RootState)=> store.ChatCollapsed.variant)
     const dispatch=useDispatch();
     const isChat=variant===ChatVariant.CHAT
     const Icon=isChat ? Users:MessageSquare

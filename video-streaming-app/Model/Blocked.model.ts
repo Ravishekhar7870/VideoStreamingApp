@@ -1,8 +1,8 @@
 import mongoose,{Schema,Document,Types} from "mongoose";
-interface Blocked extends Document{
+export interface Blocked extends Document{
     _id:string
-    BlockedUserId:Types.ObjectId
-    BlockerUserId:Types.ObjectId
+    BlockedUserId?:Types.ObjectId
+    BlockerUserId?:Types.ObjectId
 }
 const BlockedSchema:Schema<Blocked>=new Schema({
      BlockedUserId:{

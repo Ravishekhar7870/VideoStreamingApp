@@ -13,7 +13,7 @@ async function DbConect():Promise<void>{
   
     connection.isConnected=dbconnection.connections[0].readyState
    } catch (error) {
-   
+   console.log("error",error)
     process.exit(1)
    }
 }

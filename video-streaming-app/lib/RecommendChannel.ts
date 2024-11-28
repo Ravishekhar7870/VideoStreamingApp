@@ -4,8 +4,9 @@ import UserModel from "@/Model/User.mode";
 const RecommendChannel=async()=>{
   try {
     await  DbConect();
-  } catch (error:any) {
-    throw new Error(error.message)
+  } catch (error) {
+    console.log("error",error)
+    throw new Error("something went wrong")
   }
   const currUser=await getUser();
    
@@ -94,8 +95,9 @@ const RecommendChannel=async()=>{
             ]
       )
       return Users
-    } catch (error:any) {
-     throw new Error(error.message)
+    } catch (error) {
+      console.log("error",error)
+    throw new Error("something went wrong")
     }
   }
   else{
@@ -128,8 +130,9 @@ const RecommendChannel=async()=>{
             ]
       )
       return Users
-    } catch (error:any) {
-     throw new Error(error.message)
+    } catch (error) {
+      console.log("error",error)
+    throw new Error("something went wrong")
     }
   }
   

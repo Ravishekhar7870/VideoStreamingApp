@@ -1,5 +1,5 @@
 'use client'
-import { BlockUserAction, UnBlockUserAction } from '@/Actions/Blocked.actions'
+import {  UnBlockUserAction } from '@/Actions/Blocked.actions'
 import { followUser, Unfollow } from '@/Actions/follow.actions'
 import { Button } from '@/components/ui/button'
 import React, { useTransition } from 'react'

@@ -2,12 +2,11 @@ import { FollowerCount, isfollowing } from '@/Controllers/Follower.controller';
 import { getReqUser } from '@/Controllers/User.controller';
 import { notFound } from 'next/navigation';
 import React from 'react'
-import Action from './_component/Action';
-import getUser from '@/lib/GetUser';
+
 import { isBlockedByUser, } from '@/Controllers/Blocked.controller';
 import { getUserStream } from '@/Controllers/Stream.controller';
 import StreamPlayer from '@/app/(StreamPlayer)/StreamPlayer';
-import { User } from 'lucide-react';
+
 
 interface UserPageProps{
     params:{

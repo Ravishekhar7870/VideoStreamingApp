@@ -9,7 +9,7 @@ function notFound() {
             404
         </h1>
         <p>
-            Couldn't find the user
+        Could&apos;nt find the user
         </p>
         <Button asChild variant='primary'>
             <Link href='/'>

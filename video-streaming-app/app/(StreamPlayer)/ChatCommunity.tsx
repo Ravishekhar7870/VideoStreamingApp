@@ -4,7 +4,7 @@ import { Input } from '@/components/ui/input';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { useParticipants } from '@livekit/components-react';
 import React, { useMemo, useState } from 'react'
-import { useDebounceValue } from 'usehooks-ts';
+
 import CommunityItem from './CommunityItem';
 import { LocalParticipant, RemoteParticipant } from 'livekit-client';
 
@@ -31,7 +31,7 @@ function ChatCommunity({Viewername,hostName,isHidden}:ChatCommunityProps) {
         return deduped.filter((participant)=>{
             return participant?.name?.toLowerCase().includes(value.toLowerCase());
         })
-    },[Participants])
+    },[Participants,value])
     if(isHidden){
         return (
             <div className='flex flex-1 items-center justify-center'>

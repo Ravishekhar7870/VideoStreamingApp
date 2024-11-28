@@ -5,9 +5,10 @@ import Link from 'next/link'
 import Thumbnail, { ThumbnailSkelton } from './Thumbnail'
 import ChannelAvatar from '@/components/Avatar'
 import { Skeleton } from '@/components/ui/skeleton'
+import { Blocked } from '@/Model/Blocked.model'
 interface StreamCardwithUser  extends Stream{
    User:User,
-   Blocked?:Array<any>
+   Blocked?:Array<Blocked>
 }
 interface StreamcardProps{
     data:StreamCardwithUser

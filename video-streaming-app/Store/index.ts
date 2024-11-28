@@ -10,4 +10,8 @@ const AppStore=configureStore({
       ChatCollapsed:ChatCollapsedSlice.reducer
      }
 })
+export type RootState = ReturnType<typeof AppStore.getState>;
+
+// Define the AppDispatch type (optional but useful for dispatch typing)
+export type AppDispatch = typeof AppStore.dispatch;
 export default AppStore
