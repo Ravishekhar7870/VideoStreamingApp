@@ -237,6 +237,11 @@ export const getSearchedStreams=async(term:string)=>{
             }
            },
            {
+            $sort: {
+              isLive:-1,updatedAt:-1
+            }
+          },
+           {
             $project: {
               ingressId:0,
               serverKey:0,
@@ -270,6 +275,11 @@ export const getSearchedStreams=async(term:string)=>{
                 ]
               }
              },
+             {
+              $sort: {
+                isLive:-1,updatedAt:-1
+              }
+            },
              {
               $project: {
                 ingressId:0,

@@ -11,6 +11,7 @@ export interface Stream extends Document{
     isChatFollowerOnly?:boolean
     isChatEnabled?:boolean
     UserId?:Types.ObjectId
+    updatedAt:Date
 }
 const StreamSchema:Schema<Stream>=new Schema({
        thumbnail:{
