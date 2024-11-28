@@ -175,3 +175,109 @@ export const getStreamFeed=async()=>{
   }
   return streams
 }
+export const getSearchedStreams=async(term:string)=>{
+  await DbConect();
+       let LoggedinUser
+       const pattern=new RegExp(term,'i')
+       try {
+        LoggedinUser=await getUser();
+       } catch (error) {
+        LoggedinUser=null
+       }
+       let searchedStreams=[]
+       if(LoggedinUser){
+         searchedStreams=await StreamModel.aggregate([
+          {
+            $lookup:{
+              from:'blockeds',
+              let:{streamerUserId:'$UserId'},
+              pipeline:[
+                {
+                  $match:{
+                    $expr:{
+                      $and:[
+                        {$eq:['$BlockedUserId',LoggedinUser._id]},
+                        {$eq:['$BlockerUserId','$$streamerUserId']}
+                      ]
+                    }
+                  }
+                }
+              ],
+              as:'Blocked'
+  
+            }
+          },
+          {
+            $match:{
+              Blocked:{$size:0},
+              UserId: { $ne: LoggedinUser._id }
+            }
+          },
+          {
+            $lookup:{
+             from: 'users',
+             localField: 'UserId',
+             foreignField:'_id' ,
+             as: 'User'
+            }
+           },
+           {
+            $addFields: {
+              User:{
+                $arrayElemAt:["$User",0]
+              }
+            }
+           },
+           {
+            $match:{
+              $or:[
+                {name:{ $regex:pattern }},
+                {'User.username':{ $regex:pattern}}
+              ]
+            }
+           },
+           {
+            $project: {
+              ingressId:0,
+              serverKey:0,
+              serverUrl:0
+            }
+           }
+         ])
+       }
+       else{
+         searchedStreams=await StreamModel.aggregate([
+             {
+              $lookup:{
+               from: 'users',
+               localField: 'UserId',
+               foreignField:'_id' ,
+               as: 'User'
+              }
+             },
+             {
+              $addFields: {
+                User:{
+                  $arrayElemAt:["$User",0]
+                }
+              }
+             },
+             {
+              $match:{
+                $or:[
+                  {name:{ $regex:pattern }},
+                  {'User.username':{ $regex:pattern}}
+                ]
+              }
+             },
+             {
+              $project: {
+                ingressId:0,
+                serverKey:0,
+                serverUrl:0
+              }
+             }
+         ])
+       }
+       return searchedStreams;
+}

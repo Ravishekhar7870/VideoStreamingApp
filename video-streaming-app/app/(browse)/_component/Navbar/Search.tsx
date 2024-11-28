@@ -20,7 +20,7 @@ function Search() {
             return;
          }
          const url=qs.stringifyUrl({
-            url:'/',
+            url:'/search',
             query:{term:data}
          },{skipEmptyString:true})
          Router.push(url)
