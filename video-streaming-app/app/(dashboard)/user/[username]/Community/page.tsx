@@ -9,7 +9,7 @@ async function page() {
     const blockedUser = await getblockedUser()
     const data=blockedUser.map((item)=>({
         id:item._id,
-        userId:item.blockedUser.username,
+        userId:item.blockedUser._id,
   ProfilePic:item.blockedUser.ProfilePic,
   username:item.blockedUser.username,
   createdAt:format(new Date(item.createdAt),"dd/MM/yyyy")

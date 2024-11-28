@@ -40,6 +40,11 @@ export const UnBlockUserAction=async(id:string)=>{
     revalidatePath('/')
     if(unblockResult){
         const getUser=await UserModel.findById(unblockResult.BlockedUserId)
+        const LoggedinUser=await UserModel.findById(unblockResult.BlockerUserId)
+        if(LoggedinUser){
+          revalidatePath(`/user/${LoggedinUser.username}`)
+          revalidatePath(`user/${LoggedinUser.username}/Community`)
+        }
         revalidatePath(`/${getUser?.username}`)
         return getUser?.username
     }

@@ -116,6 +116,11 @@ export const getblockedUser=async()=>{
              }
            }
          },
+         {
+            $sort:{
+               createdAt:-1,
+            }
+         }
 
    ])
    return BlockedUser
