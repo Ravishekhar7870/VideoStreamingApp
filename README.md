@@ -44,9 +44,10 @@ Welcome to **GOLive**, a live video streaming platform that allows users to watc
   ![Screenshot 2024-11-29 144422](https://github.com/user-attachments/assets/33b339a4-de23-4f91-b2cd-23390b7a7296)
   <br>
 - **Stream Page(Viewer point of view)**
-  <br> 
-![Screenshot 2024-11-29 144649](https://github.com/user-attachments/assets/355a1ee8-939a-49af-b94b-ebce1330e6ba
-<br>
+  <br>
+  ![Screenshot 2024-11-29 144649](https://github.com/user-attachments/assets/d4d9df9d-c079-40f7-9df4-27038cb1a9e1
+  <br>
+
 
 
 
